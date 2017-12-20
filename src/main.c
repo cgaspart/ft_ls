@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/14 10:24:36 by cgaspart         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:14:14 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int		main(int argc, char **argv)
 {
 	if (argc == 1)
 		ft_simple(".");
-	argv[0] = ft_strdup("Peace");
+	
 	return (1);
 }

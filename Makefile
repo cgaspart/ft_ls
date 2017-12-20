@@ -6,7 +6,7 @@
 #    By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/11 11:11:37 by cgaspart          #+#    #+#              #
-#    Updated: 2017/12/14 10:24:00 by cgaspart         ###   ########.fr        #
+#    Updated: 2017/12/20 11:34:41 by cgaspart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,20 +31,20 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft
-	$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	@make -C libft
+	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 clean:
-	rm -fv $(OBJ)
+	@rm -fv $(OBJ)
 	make -C libft clean
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
 fclean: clean
-	rm -fv $(NAME)
+	@rm -fv $(NAME)
 	make -C libft fclean
 
 re: fclean all

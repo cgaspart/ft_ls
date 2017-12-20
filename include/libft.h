@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 10:41:15 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/14 11:10:58 by cgaspart         ###   ########.fr       */
+/*   Updated: 2017/12/20 09:08:01 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char				*ft_strjoin(char const *s1, char const *s2, int option);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
+char				**ft_tabascii(char **tab);
 void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
