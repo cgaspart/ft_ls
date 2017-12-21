@@ -6,16 +6,43 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/20 14:14:14 by cgaspart         ###   ########.fr       */
+/*   Updated: 2017/12/21 16:18:38 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+static void		ft_multi(int argc, char **argv)
 {
+	int		i;
+	char	**multi;
+
+	i = 0;
+	if (argc > 2)
+	{
+		multi = ft_check_multi(argc, argv);
+		while (multi[i])
+		{
+			ft_putstr(multi[i]);
+			ft_putstr(":\n");
+			ft_simple(multi[i]);
+			if (multi[i + 1] != NULL)
+				ft_putchar('\n');
+			i++;
+		}
+	}
+	else if (argc == 2 && ft_error_simple(argv[1], 1))
+		ft_simple(argv[1]);
+}
+
+int				main(int argc, char **argv)
+{
+	int		i;
+
+	i = 1;
 	if (argc == 1)
 		ft_simple(".");
-	
+	if (argc >= 2)
+		ft_multi(argc, argv);
 	return (1);
 }
