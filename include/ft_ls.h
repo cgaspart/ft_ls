@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:56:54 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/21 14:42:13 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/06 10:53:32 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ typedef struct		s_right
 	int				other;
 }					t_right;
 
-char				*ft_type(struct stat fstat);
+char				*ft_type(char *dirname);
 t_right				*ft_right(struct stat fstat);
 void				ft_putright(t_right *right);
 void				ft_simple(char	*dirname);
 char				*ft_date_converter(char *time);
 int					ft_error_simple(char *dirname, int mod);
-char				**ft_check_multi(int argc, char **argv);
+int					ft_is_file(char *name);
+char				**ft_check_dir(int argc, char **argv);
+char				**ft_check_file(int argc, char **argv);
 
 #endif
