@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:56:54 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/17 15:00:38 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/19 16:31:10 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int					ft_error_simple(char *dirname, int mod);
 int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
+char				*ft_argcheck(char **argv);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:03:45 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/17 14:31:15 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/19 16:12:47 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,10 @@ void			ft_simple(char	*dirname)
 		fname = ft_tab_fname(dirname);
 		ft_puttab(ft_tabascii(fname));
 		closedir(dir);
+	}
+	else
+	{
+		ft_putstr(dirname);
+		ft_putchar('\n');
 	}
 }

@@ -6,7 +6,7 @@
 #    By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/11 11:11:37 by cgaspart          #+#    #+#              #
-#    Updated: 2018/01/17 15:00:25 by cgaspart         ###   ########.fr        #
+#    Updated: 2018/01/19 16:23:36 by cgaspart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_NAME = main.c\
 	  ft_date_converter.c\
 	  ft_simple.c\
 	  ft_error_simple.c\
-	  ft_is_file.c
+	  ft_is_file.c\
+	  ft_argcheck.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

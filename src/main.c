@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/17 14:56:01 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/19 18:48:53 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int		main(int argc, char **argv)
 {
-	argv = NULL;
 	if (argc == 1)
 		ft_simple(".");
+	if (argc == 2 && !ft_argcheck(argv))
+		ft_simple(argv[1]);
 	return (1);
 }
