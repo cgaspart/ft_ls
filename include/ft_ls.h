@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:56:54 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/19 16:31:10 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/23 13:29:02 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
 char				*ft_argcheck(char **argv);
+t_data				*ft_getdata(char *dirname, t_data **data);
 
 #endif

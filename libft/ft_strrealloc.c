@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strrealloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 09:26:19 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/09 18:05:22 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/01/10 08:12:49 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/10 08:46:43 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, const char *src)
-{
-	int i;
+#include "libft.h"
 
-	i = 0;
-	while (src[i] != '\0')
+char	*ft_strrealloc(char *line, int len)
+{
+	char*buff;
+
+	if (line == NULL)
 	{
-		dest[i] = src[i];
-		i++;
+		line = (char*)malloc(sizeof(char) * len + 1);
 	}
-	dest[i] = '\0';
-	return (dest);
+	else
+	{
+		buff = ft_strdup(line);
+		free(line);
+		line = malloc(sizeof(char) * (ft_strlen(buff) + len));
+		ft_strcpy(line, buff);
+		free(buff);
+	}
+	return (line);
 }
