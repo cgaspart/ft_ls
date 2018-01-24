@@ -6,13 +6,13 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 11:03:30 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/06 22:30:03 by cgaspart         ###   ########.fr       */
+/*   Updated: 2017/12/14 11:13:06 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttab(char **tab)
+void	ft_puttab(char	**tab)
 {
 	int i;
 
