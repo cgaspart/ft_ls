@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_l.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/23 11:35:12 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/01/25 11:22:36 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/25 11:22:39 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void ft_argsimple(char *dirname, char *option)
+static int  ft_get_total(t_data *data)
 {
-	t_data	*data;
+    t_data  *ptrdata;
+    int     res;
 
-	if (ft_strchr(option, 'l'))
-		ft_print_l(ft_getdata(dirname));
+    ptrdata = data;
+    res = 0;
+    while (ptrdata)
+    {
+        res = res + ptrdata->link;
+        ptrdata = ptrdata->next;
+    }
+    return (res);
 }
 
-int		main(int argc, char **argv)
+void    ft_print_l(t_data **data)
 {
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+    
 }

@@ -38,8 +38,9 @@ typedef struct		s_data
 	t_right			*right;
 	int				link;
 	char			*owner;
+	char			*grp;
 	int				size;
-	int				blocks;
+	char			*date;
 	struct s_data	*next;
 }					t_data;
 
@@ -53,6 +54,7 @@ int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
 char				*ft_argcheck(char **argv);
-t_data				*ft_getdata(char *dirname, t_data **data);
+t_data				*ft_getdata(char *dirname);
+void				ft_print_l(t_data **data);
 
 #endif

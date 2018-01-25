@@ -12,26 +12,50 @@
 
 #include "ft_ls.h"
 
-t_data		*ft_getdata(char *dirname, t_data **data)
+static void		my_lstadd(t_data **alst, t_data *new)
 {
-	struct stat		fstat;
-	t_data			*ptrdata;
+	new->next = (*alst);
+	(*alst) = new;
+}
 
-	if (stat(dirname, &fstat) == -1)
+static t_data	*ft_getstat(char *this, t_data **data)
+{
+	struct stat fstat;
+	struct	passwd	*duser;
+	struct	group	*dgroup;
+	t_data 			*tmp;
+
+	if (stat(this, &fstat) == -1)
 	{
 		perror("");
-		exit (0);
+		exit(0);
 	}
-	ptrdata = *data;
-	ptrdata = (t_data*)malloc(sizeof(t_data));
-	ptrdata->name = ft_strdup(dirname);
-	ptrdata->type = ft_strdup(ft_type(dirname));
-	ptrdata->right = ft_right(fstat);
-	ft_putstr("Name :");
-	ft_putstr(ptrdata->name);
-	ft_putstr("\nType :");
-	ft_putstr(ptrdata->type);
-	ft_putstr("\nRight :");
-	ft_putright(ptrdata->right);
-	return (ptrdata);
+	duser = getpwuid(fstat.st_uid);
+	dgroup = getgrgid(fstat.st_gid);
+	tmp = (t_data*)malloc(sizeof(t_data));
+	tmp->name = ft_strdup(this);
+	tmp->type = ft_strdup(ft_type(this));
+	tmp->right = ft_right(fstat);
+	tmp->link = fstat.st_nlink;
+	tmp->owner = ft_strdup(duser->pw_name);
+	tmp->grp = ft_strdup(dgroup->gr_name);
+	tmp->size = fstat.st_size;
+	tmp->date = ft_date_converter(ctime(&fstat.st_mtime));
+	my_lstadd(data, tmp);
+}
+t_data			*ft_getdata(char *dirname)
+{
+	t_data 			*data;
+	int				i;
+	DIR				*dir;
+	struct dirent 	*file;
+
+	i = 0;
+	dir = opendir(dirname);
+	while (file = readdir(dir))
+	{
+		ft_getstat(file->d_name);
+	}
+	closedir(dir);
+	return (data);
 }
