@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-static int  ft_get_total(t_data *data)
+static int  ft_get_total(t_data **data)
 {
     t_data  *ptrdata;
     int     res;
@@ -29,5 +29,13 @@ static int  ft_get_total(t_data *data)
 
 void    ft_print_l(t_data **data)
 {
-    
+    t_data *ptrdata;
+
+    ptrdata = data;
+    ft_putstr("total ");
+    ft_putnbr(ft_get_total(&data));
+    while (ptrdata)
+    {
+        
+    }   
 }
