@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strascii.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/12/14 12:57:03 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/12/20 11:18:46 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-static void ft_argsimple(char *dirname, char *option)
+char	**ft_tabascii(char **tab)
 {
-	t_data	*data;
+	int		i;
+	char	*buff;
+	char	*buff2;
 
-	if (ft_strchr(option, 'l'))
+	i = 0;
+	while (tab[i])
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		if (tab[i + 1] && ft_strcmp(tab[i], tab[i + 1]) > 0)
+		{
+			buff = ft_strdup(tab[i]);
+			buff2 = ft_strdup(tab[i + 1]);
+			tab[i] = ft_strdup(buff2);
+			tab[i + 1] = ft_strdup(buff);
+			i = 0;
+		}
+		else
+			i++;
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	return (tab);
 }

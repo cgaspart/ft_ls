@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_type.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/12/12 10:17:24 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/29 08:35:16 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void ft_argsimple(char *dirname, char *option)
+char	ft_type(char *dirname)
 {
-	t_data	*data;
+	struct stat fstat;
 
-	if (ft_strchr(option, 'l'))
-	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
-	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	if (stat(dirname, &fstat) == -1)
+		return (0);
+	if (S_ISDIR (fstat.st_mode))
+		return ('d');
+	if (S_ISREG (fstat.st_mode))
+		return ('-');
+	if (S_ISSOCK (fstat.st_mode))
+		return ('s');
+	if (S_ISFIFO (fstat.st_mode))
+		return ('p');
+	if (S_ISCHR (fstat.st_mode))
+		return ('c');
+	if (S_ISBLK (fstat.st_mode))
+		return ('b');
+	return (0);
 }

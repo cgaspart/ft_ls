@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/11/15 09:18:06 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/11/15 09:49:24 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-static void ft_argsimple(char *dirname, char *option)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	t_data	*data;
+	char	*fraiche;
+	int		i;
 
-	if (ft_strchr(option, 'l'))
+	i = 0;
+	if (s == NULL || f == NULL)
+		return (NULL);
+	fraiche = (char*)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (fraiche == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		fraiche[i] = f(s[i]);
+		i++;
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	fraiche[i] = '\0';
+	return (fraiche);
 }

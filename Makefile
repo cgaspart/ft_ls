@@ -6,7 +6,7 @@
 #    By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/11 11:11:37 by cgaspart          #+#    #+#              #
-#    Updated: 2018/01/23 13:29:00 by cgaspart         ###   ########.fr        #
+#    Updated: 2018/01/30 10:03:02 by cgaspart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRC_NAME = main.c\
 	  ft_error_simple.c\
 	  ft_is_file.c\
 	  ft_argcheck.c\
-	  ft_getdata.c
+	  ft_getdata.c\
+	  ft_print_l.c\
+	  ft_get_ascii_tab.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

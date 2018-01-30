@@ -1,37 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_date_converter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/12/12 15:43:50 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/29 10:37:17 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void ft_argsimple(char *dirname, char *option)
+static void		ft_conv2(char *res, char *time, int j)
 {
-	t_data	*data;
+	int i;
 
-	if (ft_strchr(option, 'l'))
+	i = 10;
+	while (i < 16)
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		res[j] = time[i];
+		i++;
+		j++;
 	}
+	res[j] = '\0';
 }
 
-int		main(int argc, char **argv)
+char			*ft_date_converter(char *time)
 {
-	char	*option;
+	char	*res;
+	int		i;
+	int		j;
 
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	i = 4;
+	j = 0;
+	res = malloc(sizeof(char) * 13);
+	while (i < 10)
+	{
+		res[j] = time[i];
+		j++;
+		i++;
+	}
+	ft_conv2(res, time, j);
+	return (res);
 }

@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/11/14 06:46:34 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/11/23 12:19:56 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-static void ft_argsimple(char *dirname, char *option)
+size_t	ft_strlcat(char *dest, const char *src, size_t count)
 {
-	t_data	*data;
+	size_t i;
+	size_t j;
+	size_t result;
 
-	if (ft_strchr(option, 'l'))
+	i = 0;
+	j = 0;
+	result = ft_strlen(src);
+	while (dest[i] && i < count)
+		i++;
+	if (count > 0)
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		while (src[j] && i < count - 1)
+		{
+			dest[i++] = src[j++];
+		}
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	if (j > 0)
+	{
+		dest[i] = '\0';
+		return (result + i - j);
+	}
+	return (result + i);
 }

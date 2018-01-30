@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/11/10 08:36:13 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/11/22 07:22:08 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-static void ft_argsimple(char *dirname, char *option)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_data	*data;
+	unsigned int i;
 
-	if (ft_strchr(option, 'l'))
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (i < n - 1 && (s2[i] != '\0' && s1[i] != '\0') && s1[i] == s2[i])
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		i++;
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

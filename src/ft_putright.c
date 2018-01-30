@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putright.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/12/12 13:27:31 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/12/12 13:52:17 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void ft_argsimple(char *dirname, char *option)
+static	void	ft_rconverter(int	nbr)
 {
-	t_data	*data;
-
-	if (ft_strchr(option, 'l'))
+	if ((nbr - 4) >= 0)
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		nbr = nbr - 4;
+		ft_putchar('r');
 	}
+	else
+		ft_putchar('-');
+	if ((nbr - 2) >= 0)
+	{
+		nbr = nbr - 2;
+		ft_putchar('w');
+	}
+	else
+		ft_putchar('-');
+	if ((nbr - 1) >= 0)
+	{
+		nbr= nbr - 1;
+		ft_putchar('x');
+	}
+	else
+		ft_putchar('-');
 }
 
-int		main(int argc, char **argv)
+void	ft_putright(t_right *right)
 {
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
+	ft_rconverter(right->owner);
+	ft_rconverter(right->group);
+	ft_rconverter(right->other);
 }

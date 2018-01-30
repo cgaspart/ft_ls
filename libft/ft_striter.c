@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/11/15 09:02:06 by cgaspart          #+#    #+#             */
+/*   Updated: 2017/11/22 06:56:38 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
-static void ft_argsimple(char *dirname, char *option)
+void	ft_striter(char *s, void (*f)(char *))
 {
-	t_data	*data;
+	int i;
 
-	if (ft_strchr(option, 'l'))
+	i = 0;
+	if (s && f)
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		while (s[i] != '\0')
+		{
+			f(s + i);
+			i++;
+		}
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
-	return (1);
 }

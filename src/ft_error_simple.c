@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error_simple.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/11 12:55:07 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:34 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/12/21 12:16:35 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/06 11:51:22 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void ft_argsimple(char *dirname, char *option)
+int				ft_error_simple(char *dirname, int mod)
 {
-	t_data	*data;
+	DIR		*dir;
 
-	if (ft_strchr(option, 'l'))
+	dir = opendir(dirname);
+	if (dir == NULL)
 	{
-		data = ft_getdata(dirname, 0);
-		ft_print_l(&data);
+		if (ft_is_file(dirname))
+			return (0);
+		if (mod)
+		{
+			ft_putstr("ft_ls: ");
+			ft_putstr(dirname);
+			ft_putstr(": ");
+			perror("");
+		}
+		return (0);
 	}
-}
-
-int		main(int argc, char **argv)
-{
-	char	*option;
-
-	if (argc == 1)
-		ft_simple(".");
-	if (argc == 2 && !ft_argcheck(argv))
-		ft_simple(argv[1]);
-	if (argc == 2 && (option = ft_argcheck(argv)))
-		ft_argsimple(".", option);
+	closedir(dir);
 	return (1);
 }
