@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 11:22:36 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:36 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:06:46 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			ft_print_l(t_data **data)
 	t_data		*ptrdata;
 
 	ptrdata = *data;
-	while (ptrdata)
+	while (ptrdata->next != NULL)
 	{
 		ft_get_right(ptrdata);
 		ft_putnbr(ptrdata->link);
@@ -39,6 +39,7 @@ void			ft_print_l(t_data **data)
 		ft_putstr(ptrdata->date);
 		ft_putchar(' ');
 		ft_putstr(ptrdata->name);
+		ft_putnbr(ptrdata->id);
 		ptrdata = ptrdata->next;
 	}
 }

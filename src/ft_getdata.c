@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 10:12:49 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 08:30:32 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/02/02 09:13:02 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void		my_lstadd(t_data **alst, t_data *new)
 
 static void		ft_getstat(char *this, t_data **data)
 {
-	struct stat fstat;
-	struct	passwd	*duser;
-	struct	group	*dgroup;
-	t_data 			*tmp;
+	struct stat			fstat;
+	struct passwd		*duser;
+	struct group		*dgroup;
+	t_data				*tmp;
 
 	if (stat(this, &fstat) == -1)
 	{
@@ -46,16 +46,17 @@ static void		ft_getstat(char *this, t_data **data)
 
 t_data			*ft_getdata(char *dirname, int option)
 {
-	t_data 			*data;
+	t_data			*data;
 	int				i;
 	DIR				*dir;
-	struct dirent 	*file;
+	struct dirent	*file;
 
 	i = 0;
+	data = NULL;
 	dir = opendir(dirname);
 	while ((file = readdir(dir)))
 	{
-		if (option == 1)
+		if (option)
 			ft_getstat(file->d_name, &data);
 		else if (file->d_name[0] != '.')
 			ft_getstat(file->d_name, &data);

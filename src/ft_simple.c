@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:03:45 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/19 16:12:47 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/02/02 09:27:52 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char		**ft_tab_fname(char *dirname)
 	return (res);
 }
 
-void			ft_simple(char	*dirname)
+void			ft_simple(char *dirname)
 {
 	char			**fname;
 	DIR				*dir;

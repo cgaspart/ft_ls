@@ -6,7 +6,7 @@
 #    By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 10:42:03 by cgaspart          #+#    #+#              #
-#    Updated: 2018/01/30 07:19:36 by cgaspart         ###   ########.fr        #
+#    Updated: 2018/02/03 10:30:49 by cgaspart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ SRC_NAME = ft_putchar.c\
 	  ft_lstmap.c\
 	  ft_puttab.c\
 	  ft_tabascii.c\
-	  ft_print_space.c
+	  ft_print_space.c\
+	  ft_issame.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

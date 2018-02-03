@@ -6,13 +6,13 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 13:27:31 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/12 13:52:17 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/02/02 09:10:16 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	void	ft_rconverter(int	nbr)
+static	void	ft_rconverter(int nbr)
 {
 	if ((nbr - 4) >= 0)
 	{
@@ -30,14 +30,14 @@ static	void	ft_rconverter(int	nbr)
 		ft_putchar('-');
 	if ((nbr - 1) >= 0)
 	{
-		nbr= nbr - 1;
+		nbr = nbr - 1;
 		ft_putchar('x');
 	}
 	else
 		ft_putchar('-');
 }
 
-void	ft_putright(t_right *right)
+void			ft_putright(t_right *right)
 {
 	ft_rconverter(right->owner);
 	ft_rconverter(right->group);

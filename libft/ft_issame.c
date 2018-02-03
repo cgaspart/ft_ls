@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_type.c                                          :+:      :+:    :+:   */
+/*   ft_issame.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/12 10:17:24 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/02/02 09:13:36 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/02/03 10:28:44 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/02/03 10:30:31 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
-char	ft_type(char *dirname)
+int		ft_issame(char *first, char *second)
 {
-	struct stat fstat;
+	int i;
 
-	if (stat(dirname, &fstat) == -1)
-		return (0);
-	if (S_ISDIR(fstat.st_mode))
-		return ('d');
-	if (S_ISREG(fstat.st_mode))
-		return ('-');
-	if (S_ISSOCK(fstat.st_mode))
-		return ('s');
-	if (S_ISFIFO(fstat.st_mode))
-		return ('p');
-	if (S_ISCHR(fstat.st_mode))
-		return ('c');
-	if (S_ISBLK(fstat.st_mode))
-		return ('b');
-	return (0);
+	i = 0;
+	while (first[i] != '\0' && second[i] != '\0')
+	{
+		if (first[i] != second[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

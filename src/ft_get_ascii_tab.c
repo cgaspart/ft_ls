@@ -6,13 +6,13 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 09:09:12 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 10:01:04 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/02/02 09:09:18 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int		ft_nbr_tab(char *dirname)
+static int		ft_nbr_tab(char *dirname, int a_option)
 {
 	int				i;
 	DIR				*dir;
@@ -22,14 +22,16 @@ static int		ft_nbr_tab(char *dirname)
 	dir = opendir(dirname);
 	while ((file = readdir(dir)))
 	{
-		if (file->d_name[0] != '.')
+		if (a_option)
+			i++;
+		else if (file->d_name[0] != '.')
 			i++;
 	}
 	closedir(dir);
 	return (i);
 }
 
-static char		**ft_tab_fname(char *dirname)
+static char		**ft_tab_fname(char *dirname, int a_option)
 {
 	int				i;
 	char			**res;
@@ -37,28 +39,28 @@ static char		**ft_tab_fname(char *dirname)
 	struct dirent	*file;
 
 	i = 0;
-	res = malloc(sizeof(char*) * ft_nbr_tab(dirname) + 1);
+	res = malloc(sizeof(char*) * ft_nbr_tab(dirname, a_option) + 1);
 	dir = opendir(dirname);
 	while ((file = readdir(dir)))
 	{
-		if (file->d_name[0] != '.')
-		{
+		if (a_option)
 			res[i] = ft_strdup(file->d_name);
-			i++;
-		}
+
+		else if (file->d_name[0] != '.')
+			res[i] = ft_strdup(file->d_name);
+
+		i++;
 	}
 	res[i] = NULL;
 	closedir(dir);
 	return (res);
 }
 
-char		  **ft_get_ascii_tab(char *dirname)
+char			**ft_get_ascii_tab(char *dirname, int a_option)
 {
 	char			**fname;
-	DIR				*dir;
 
-	dir = opendir(dirname);
-	fname = ft_tabascii(ft_tab_fname(dirname));
-	closedir(dir);
-    return (fname);
+	fname = ft_tab_fname(dirname, a_option);
+	fname = ft_tabascii(fname);
+	return (fname);
 }

@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_type.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/12 10:17:24 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/02/02 09:13:36 by cgaspart         ###   ########.fr       */
+/*   Created: 2017/11/29 09:21:39 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/01/10 08:54:18 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 42
 
-char	ft_type(char *dirname)
+# include "libft/includes/libft.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+typedef struct		s_data
 {
-	struct stat fstat;
+	void			*content;
+	size_t			content_size;
+	int				here;
+	struct s_data	*next;
+}					t_data;
 
-	if (stat(dirname, &fstat) == -1)
-		return (0);
-	if (S_ISDIR(fstat.st_mode))
-		return ('d');
-	if (S_ISREG(fstat.st_mode))
-		return ('-');
-	if (S_ISSOCK(fstat.st_mode))
-		return ('s');
-	if (S_ISFIFO(fstat.st_mode))
-		return ('p');
-	if (S_ISCHR(fstat.st_mode))
-		return ('c');
-	if (S_ISBLK(fstat.st_mode))
-		return ('b');
-	return (0);
-}
+int					get_next_line(const int fd, char **line);
+
+#endif

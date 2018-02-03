@@ -29,7 +29,8 @@ SRC_NAME = main.c\
 	  ft_argcheck.c\
 	  ft_getdata.c\
 	  ft_print_l.c\
-	  ft_get_ascii_tab.c
+	  ft_get_ascii_tab.c\
+	  ft_sort_lst.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

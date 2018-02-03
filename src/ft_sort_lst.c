@@ -1,50 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_argcheck.c                                      :+:      :+:    :+:   */
+/*   ft_sort_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/19 16:19:16 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/02/02 09:07:22 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/02/02 09:28:42 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/02/02 09:28:45 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static char		*ft_strascii(char *str)
+static t_data	*ft_getlst(char *name, t_data **data)
 {
-	int		i;
-	char	buff;
+	t_data	*ptrdata;
 
-	i = 0;
-	while (str[i] != '\0')
+	ptrdata = *data;
+	while (ptrdata)
 	{
-		if ((str[i] < str[i + 1]) && (str[i + 1] != '\0'))
+		if (ft_issame(ptrdata->name, name))
 		{
-			buff = str[i];
-			str[i] = str[i + 1];
-			str[i + 1] = buff;
-			i = 0;
+			return (ptrdata);
 		}
-		i++;
+		ptrdata = ptrdata->next;
 	}
-	return (str);
+	return (NULL);
 }
 
-char			*ft_argcheck(char **argv)
+void		ft_sort_lst(t_data **data, char **ascii)
 {
-	int		i;
-	int		j;
-	char	*res;
+    t_data      *glist;
+    int         i;
 
-	i = 1;
-	j = 0;
-	if (argv[1][0] == '-')
-	{
-		res = ft_strascii(ft_strdup(argv[1] + 1));
-		return (res);
-	}
-	else
-		return (NULL);
+    i = 0;
+    while (ascii[i])
+    {
+        glist = ft_getlst(ascii[i], data);
+		if (glist != NULL)
+        	glist->id = i;
+        i++;
+    }
 }

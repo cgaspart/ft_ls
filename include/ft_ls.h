@@ -6,7 +6,7 @@
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:56:54 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/01/30 10:02:46 by cgaspart         ###   ########.fr       */
+/*   Updated: 2018/02/02 09:06:07 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <errno.h>
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <dirent.h>
@@ -31,8 +31,10 @@ typedef struct		s_right
 	int				group;
 	int				other;
 }					t_right;
+
 typedef struct		s_data
 {
+	int				id;
 	char			*name;
 	char			type;
 	t_right			*right;
@@ -54,8 +56,8 @@ int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
 char				*ft_argcheck(char **argv);
-t_data				*ft_getdata(char *dirname, int option);
+t_data				*ft_getdata(char *dirname, int a_option);
 void				ft_print_l(t_data **data);
-char                **ft_get_ascii_tabt(char *dirname);
-
+char				**ft_get_ascii_tab(char *dirname, int a_option);
+void 				ft_sort_lst(t_data **data, char **ascii);
 #endif
