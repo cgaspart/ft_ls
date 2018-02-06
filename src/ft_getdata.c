@@ -44,23 +44,17 @@ static void		ft_getstat(char *this, t_data **data)
 	my_lstadd(data, tmp);
 }
 
-t_data			*ft_getdata(char *dirname, int option)
+t_data			*ft_getdata(char **order)
 {
 	t_data			*data;
 	int				i;
-	DIR				*dir;
-	struct dirent	*file;
 
 	i = 0;
 	data = NULL;
-	dir = opendir(dirname);
-	while ((file = readdir(dir)))
+	while (order[i])
 	{
-		if (option)
-			ft_getstat(file->d_name, &data);
-		else if (file->d_name[0] != '.')
-			ft_getstat(file->d_name, &data);
+		ft_getstat(order[i], &data);
+		i++;
 	}
-	closedir(dir);
 	return (data);
 }

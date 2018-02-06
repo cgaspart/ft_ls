@@ -12,39 +12,51 @@
 
 #include "ft_ls.h"
 
-static char		*ft_strascii(char *str)
+static void		ft_get_opt(char *argv, t_opt *option)
 {
-	int		i;
-	char	buff;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i] < str[i + 1]) && (str[i + 1] != '\0'))
-		{
-			buff = str[i];
-			str[i] = str[i + 1];
-			str[i + 1] = buff;
-			i = 0;
-		}
-		i++;
-	}
-	return (str);
-}
-
-char			*ft_argcheck(char **argv)
-{
-	int		i;
-	int		j;
-	char	*res;
+	int i;
 
 	i = 1;
-	j = 0;
-	if (argv[1][0] == '-')
+	while (argv[i] != '\0')
 	{
-		res = ft_strascii(ft_strdup(argv[1] + 1));
-		return (res);
+		if (argv[i] == 'l')
+			option->l = 1;
+		if (argv[i] == 'R')
+			option->upper_r = 1;
+		if (argv[i] == 'a')
+			option->a = 1;
+		if (argv[i] == 'r')
+			option->r = 1;
+		if (argv[i] == 't')
+			option->t = 1;
+		if (argv[i] == 'u')
+			option->u = 1;
+		if (argv[i] == 'f')
+			option->f = 1;
+		if (argv[i] == 'g')
+			option->g = 1;
+		i++;
 	}
-	else
-		return (NULL);
+}
+
+int			ft_arg_opt(char **argv, int argc, t_opt *option)
+{
+	int 	res;
+	int		i;
+
+	i = 1;
+	res = 0;
+	*option = (t_opt){0, 0, 0, 0, 0, 0, 0, 0};
+	while (i < argc)
+	{
+		if (argv[i][0] == '-')
+		{
+			ft_get_opt(argv[i], option);
+			res = 1;
+		}
+		else
+			break;
+		i++;
+	}
+	return (res);
 }

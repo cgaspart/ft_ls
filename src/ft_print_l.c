@@ -25,7 +25,7 @@ void			ft_print_l(t_data **data)
 	t_data		*ptrdata;
 
 	ptrdata = *data;
-	while (ptrdata->next != NULL)
+	while (ptrdata)
 	{
 		ft_get_right(ptrdata);
 		ft_putnbr(ptrdata->link);
@@ -39,7 +39,6 @@ void			ft_print_l(t_data **data)
 		ft_putstr(ptrdata->date);
 		ft_putchar(' ');
 		ft_putstr(ptrdata->name);
-		ft_putnbr(ptrdata->id);
 		ptrdata = ptrdata->next;
 	}
 }

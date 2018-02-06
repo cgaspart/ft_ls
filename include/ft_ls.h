@@ -32,9 +32,20 @@ typedef struct		s_right
 	int				other;
 }					t_right;
 
+typedef struct		s_opt
+{
+	int				l;
+	int				upper_r;
+	int				a;
+	int				r;
+	int				t;
+	int				u;
+	int				f;
+	int				g;
+}					t_opt;
+
 typedef struct		s_data
 {
-	int				id;
 	char			*name;
 	char			type;
 	t_right			*right;
@@ -55,8 +66,8 @@ int					ft_error_simple(char *dirname, int mod);
 int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
-char				*ft_argcheck(char **argv);
-t_data				*ft_getdata(char *dirname, int a_option);
+int					ft_arg_opt(char **argv, int argc, t_opt *option);
+t_data				*ft_getdata(char **order);
 void				ft_print_l(t_data **data);
 char				**ft_get_ascii_tab(char *dirname, int a_option);
 void 				ft_sort_lst(t_data **data, char **ascii);
