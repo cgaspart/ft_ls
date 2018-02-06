@@ -12,6 +12,14 @@
 
 #include "ft_ls.h"
 
+static void 	ft_no_flag(int argc, char **argv)
+{
+	if (argc > 2)
+		ft_putstr("Not set yet...");
+	else
+		ft_simple(argv[1]);
+}
+
 int				main(int argc, char **argv)
 {
 	t_opt	option;
@@ -21,6 +29,8 @@ int				main(int argc, char **argv)
 	if (argc > 1)
 	{
 		if (!ft_arg_opt(argv, argc, &option))
+			ft_no_flag(argc, argv);
+
 	}
 	return (1);
 }

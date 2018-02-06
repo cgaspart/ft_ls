@@ -70,5 +70,4 @@ int					ft_arg_opt(char **argv, int argc, t_opt *option);
 t_data				*ft_getdata(char **order);
 void				ft_print_l(t_data **data);
 char				**ft_get_ascii_tab(char *dirname, int a_option);
-void 				ft_sort_lst(t_data **data, char **ascii);
 #endif
