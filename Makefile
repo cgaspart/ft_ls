@@ -24,12 +24,14 @@ SRC_NAME = main.c\
 	  ft_putright.c\
 	  ft_date_converter.c\
 	  ft_simple.c\
-	  ft_error_simple.c\
+	  ft_error.c\
 	  ft_is_file.c\
-	  ft_argcheck.c\
+	  ft_arg_opt.c\
 	  ft_getdata.c\
 	  ft_print_l.c\
-	  ft_get_ascii_tab.c
+	  ft_get_ascii_tab.c\
+	  ft_nf_arg_ascii.c\
+	  ft_nf_multi.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

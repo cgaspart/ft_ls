@@ -12,6 +12,14 @@
 
 #include "ft_ls.h"
 
+static void		usage(char opt)
+{
+	ft_putstr("ft_ls: illegal option -- ");
+	ft_putchar(opt);
+	ft_putstr("\nusage: ft_ls [-Rafglrtu] [file ...]\n");
+	exit (0);
+}
+
 static void		ft_get_opt(char *argv, t_opt *option)
 {
 	int i;
@@ -35,14 +43,16 @@ static void		ft_get_opt(char *argv, t_opt *option)
 			option->f = 1;
 		if (argv[i] == 'g')
 			option->g = 1;
+		else
+			usage(argv[i]);
 		i++;
 	}
 }
 
-int			ft_arg_opt(char **argv, int argc, t_opt *option)
+int				ft_arg_opt(char **argv, int argc, t_opt *option)
 {
-	int 	res;
-	int		i;
+	int	res;
+	int	i;
 
 	i = 1;
 	res = 0;
@@ -55,7 +65,7 @@ int			ft_arg_opt(char **argv, int argc, t_opt *option)
 			res = 1;
 		}
 		else
-			break;
+			break ;
 		i++;
 	}
 	return (res);
