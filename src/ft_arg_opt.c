@@ -20,6 +20,13 @@ static void		usage(char opt)
 	exit (0);
 }
 
+static void		checker(char opt)
+{
+	if (opt != 'l' && opt != 'R' && opt != 'a' && opt != 'r' && opt != 't' &&
+	opt != 'u' && opt != 'f' && opt != 'g')
+		usage(opt);
+}
+
 static void		ft_get_opt(char *argv, t_opt *option)
 {
 	int i;
@@ -43,8 +50,7 @@ static void		ft_get_opt(char *argv, t_opt *option)
 			option->f = 1;
 		if (argv[i] == 'g')
 			option->g = 1;
-		else
-			usage(argv[i]);
+		checker(argv[i]);
 		i++;
 	}
 }

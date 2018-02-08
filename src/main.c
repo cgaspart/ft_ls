@@ -14,11 +14,12 @@
 
 static void		ft_flag(int argc, char **argv, t_opt *option)
 {
+	option = NULL;
 	if (argc > 2)
-		ft_putstr("Not set yet...");
+		argv = NULL;
 	else
 	{
-		ft_putstr("Not set yet...");
+		argc = 0;
 	}
 
 }
