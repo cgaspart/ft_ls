@@ -12,9 +12,10 @@
 
 #include "ft_ls.h"
 
-static void		ft_get_right(t_data *data)
+static void		ft_get_right(t_data *data, int i)
 {
-	ft_putchar('\n');
+	if (i)
+		ft_putchar('\n');
 	ft_putchar(ft_type(data->name));
 	ft_putright(data->right);
 	ft_print_space(3, data->link);
@@ -22,12 +23,14 @@ static void		ft_get_right(t_data *data)
 
 void			ft_print_l(t_data **data)
 {
+	int			i;
 	t_data		*ptrdata;
 
 	ptrdata = *data;
+	i = 0;
 	while (ptrdata)
 	{
-		ft_get_right(ptrdata);
+		ft_get_right(ptrdata, i);
 		ft_putnbr(ptrdata->link);
 		ft_putchar(' ');
 		ft_putstr(ptrdata->owner);
@@ -40,5 +43,6 @@ void			ft_print_l(t_data **data)
 		ft_putchar(' ');
 		ft_putstr(ptrdata->name);
 		ptrdata = ptrdata->next;
+		i++;
 	}
 }

@@ -72,5 +72,10 @@ void				ft_print_l(t_data **data);
 char				**ft_get_ascii_tab(char *dirname, int a_option);
 char 				**ft_nf_arg_ascii_dir(int argc, char **argv);
 char 				**ft_nf_arg_ascii_file(int argc, char **argv);
+char 				**ft_f_arg_ascii_file(int argc, char **argv);
+char 				**ft_f_arg_ascii_dir(int argc, char **argv);
+char				**ft_f_arg_revascii_dir(int argc, char **argv);
+char				**ft_f_arg_revascii_file(int argc, char **argv);
 void    			ft_nf_multi(int argc, char **argv);
+void				ft_f_simple(t_opt *option);
 #endif

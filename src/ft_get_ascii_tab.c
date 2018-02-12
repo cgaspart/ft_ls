@@ -44,12 +44,16 @@ static char		**ft_tab_fname(char *dirname, int a_option)
 	while ((file = readdir(dir)))
 	{
 		if (a_option)
+		{
 			res[i] = ft_strdup(file->d_name);
+			i++;
+		}
 
 		else if (file->d_name[0] != '.')
+		{
 			res[i] = ft_strdup(file->d_name);
-
-		i++;
+			i++;
+		}
 	}
 	res[i] = NULL;
 	closedir(dir);
@@ -61,6 +65,5 @@ char			**ft_get_ascii_tab(char *dirname, int a_option)
 	char			**fname;
 
 	fname = ft_tab_fname(dirname, a_option);
-	fname = ft_tabascii(fname);
 	return (fname);
 }

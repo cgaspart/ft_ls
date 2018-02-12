@@ -14,14 +14,21 @@
 
 static void		ft_flag(int argc, char **argv, t_opt *option)
 {
-	option = NULL;
-	if (argc > 2)
-		argv = NULL;
+	char **argfile;
+	char **argdir;
+
+	if (option->r == 1)
+	{
+		argfile = ft_f_arg_revascii_file(argc, argv);
+		argdir = ft_f_arg_revascii_dir(argc, argv);
+	}
 	else
 	{
-		argc = 0;
+		argdir = ft_f_arg_ascii_dir(argc, argv);
+		argfile = ft_f_arg_ascii_file(argc, argv);
 	}
-
+	if (argdir[0] == NULL && argfile[0] == NULL)
+		ft_f_simple(option);
 }
 
 static void		ft_no_flag(int argc, char **argv)
