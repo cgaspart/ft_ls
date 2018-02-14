@@ -53,6 +53,7 @@ typedef struct		s_data
 	char			*owner;
 	char			*grp;
 	int				size;
+	int				blocks;
 	char			*date;
 	struct s_data	*next;
 }					t_data;
@@ -77,5 +78,5 @@ char 				**ft_f_arg_ascii_dir(int argc, char **argv);
 char				**ft_f_arg_revascii_dir(int argc, char **argv);
 char				**ft_f_arg_revascii_file(int argc, char **argv);
 void    			ft_nf_multi(int argc, char **argv);
-void				ft_f_simple(t_opt *option);
+void				ft_f_simple(t_opt *option, char *dirname);
 #endif

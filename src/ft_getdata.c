@@ -40,6 +40,7 @@ static void		ft_getstat(char *this, t_data **data)
 	tmp->owner = ft_strdup(duser->pw_name);
 	tmp->grp = ft_strdup(dgroup->gr_name);
 	tmp->size = fstat.st_size;
+	tmp->blocks = fstat.st_blocks;
 	tmp->date = ft_date_converter(ctime(&fstat.st_mtime));
 	my_lstadd(data, tmp);
 }

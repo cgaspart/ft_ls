@@ -12,26 +12,105 @@
 
 #include "ft_ls.h"
 
-void		ft_f_simple(t_opt *option)
+static void	l_option(t_opt *option, char *dirname)
 {
 	t_data 	*data;
 	char	**order;
 
-	if (option->l == 1)
+	if (option->r == 0)
 	{
-		if (option->r == 0)
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabrev_ascii(order);
+		data = ft_getdata(order);
+		ft_print_l(&data);
+	}
+	else
+	{
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabascii(order);
+		data = ft_getdata(order);
+		ft_print_l(&data);
+	}
+}
+
+static void	a_option(t_opt *option, char *dirname)
+{
+	char	**order;
+
+	if (option->r == 0)
+	{
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabascii(order);
+		ft_puttab(order);
+	}
+	else
+	{
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabrev_ascii(order);
+		ft_puttab(order);
+	}
+}
+
+static void	upper_r_option(t_opt *option, char *dirname)
+{
+	char	**order;
+	t_data	*data;
+	char	*path;
+	int		i;
+
+	i = 0;
+	if (option->r == 0)
+	{
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabascii(order);
+		ft_puttab(order);
+	}
+	else
+	{
+		order = ft_get_ascii_tab(dirname, option->a);
+		order = ft_tabrev_ascii(order);
+		ft_puttab(order);
+	}
+	if (option->l)
+	{
+		data = ft_getdata(order);
+		ft_print_l(&data);
+	}
+	while (order[i])
+	{
+		path = ft_strdup(dirname);
+		path = ft_strjoin(path, "/");
+		path = ft_strjoin(path, order[i]);
+		if (!ft_is_file(path))
 		{
-			order = ft_get_ascii_tab(".", option->a);
-			order = ft_tabrev_ascii(order);
-			data = ft_getdata(order);
-			ft_print_l(&data);
+			ft_putchar('\n');
+			ft_putstr(path);
+			ft_putstr(":\n");
+			upper_r_option(option, path);
+			free(path);
 		}
-		else
+		i++;
+	}
+	return ;
+}
+
+void		ft_f_simple(t_opt *option, char *dirname)
+{
+	if (!ft_is_file(dirname))
+	{
+		if (ft_error(dirname))
 		{
-			order = ft_get_ascii_tab(".", option->a);
-			order = ft_tabascii(order);
-			data = ft_getdata(order);
-			ft_print_l(&data);
+			if (option->upper_r)
+				upper_r_option(option, dirname);
+			else if (option->l == 1)
+				l_option(option, dirname);
+			else if (option->a || option->r)
+				a_option(option, dirname);
 		}
+	}
+	else
+	{
+		ft_putstr(dirname);
+		ft_putchar('\n');
 	}
 }

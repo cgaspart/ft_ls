@@ -21,13 +21,31 @@ static void		ft_get_right(t_data *data, int i)
 	ft_print_space(3, data->link);
 }
 
+static void		ft_get_blocks(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (data)
+	{
+		i = i + data->blocks;
+		data = data->next;
+	}
+	ft_putstr("total ");
+	ft_putnbr(i);
+	ft_putchar('\n');
+}
+
 void			ft_print_l(t_data **data)
 {
 	int			i;
 	t_data		*ptrdata;
+	t_data		*blocksdata;
 
 	ptrdata = *data;
+	blocksdata = *data;
 	i = 0;
+	ft_get_blocks(blocksdata);
 	while (ptrdata)
 	{
 		ft_get_right(ptrdata, i);
@@ -45,4 +63,5 @@ void			ft_print_l(t_data **data)
 		ptrdata = ptrdata->next;
 		i++;
 	}
+	ft_putchar('\n');
 }

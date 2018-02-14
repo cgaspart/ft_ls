@@ -28,7 +28,7 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 		argfile = ft_f_arg_ascii_file(argc, argv);
 	}
 	if (argdir[0] == NULL && argfile[0] == NULL)
-		ft_f_simple(option);
+		ft_f_simple(option, ".");
 }
 
 static void		ft_no_flag(int argc, char **argv)
