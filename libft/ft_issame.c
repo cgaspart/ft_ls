@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_issame(char *first, char *second)
 {
 	int i;
 
 	i = 0;
+	if (ft_strlen(first) != ft_strlen(second))
+		return (0);
 	while (first[i] != '\0' && second[i] != '\0')
 	{
 		if (first[i] != second[i])

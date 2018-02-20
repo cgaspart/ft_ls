@@ -18,6 +18,35 @@ static void		my_lstadd(t_data **alst, t_data *new)
 	(*alst) = new;
 }
 
+static char		*get_name(char *this)
+{
+	char	*res;
+	int 	len;
+	int 	i;
+
+	len = ft_strlen(this);
+	i = 0;
+	if (ft_strchr(this, '/'))
+	{
+		while (this[len] != '/')
+		{
+			i++;
+			len--;
+		}
+		res = malloc(sizeof(char) * i + 1);
+		i = 0;
+		len++;
+		while (this[len + i] != '\0')
+		{
+			res[i] = this[len + i];
+			i++;
+		}
+		res[i] = '\0';
+		return (res);
+	}
+	return (this);
+}
+
 static void		ft_getstat(char *this, t_data **data)
 {
 	struct stat			fstat;
@@ -33,7 +62,7 @@ static void		ft_getstat(char *this, t_data **data)
 	tmp = (t_data*)malloc(sizeof(t_data));
 	duser = getpwuid(fstat.st_uid);
 	dgroup = getgrgid(fstat.st_gid);
-	tmp->name = ft_strdup(this);
+	tmp->name = get_name(this);
 	tmp->type = ft_type(this);
 	tmp->right = ft_right(fstat);
 	tmp->link = fstat.st_nlink;
@@ -45,16 +74,19 @@ static void		ft_getstat(char *this, t_data **data)
 	my_lstadd(data, tmp);
 }
 
-t_data			*ft_getdata(char **order)
+t_data			*ft_getdata(char **order, char *dirname)
 {
 	t_data			*data;
+	char			*this;
 	int				i;
 
 	i = 0;
 	data = NULL;
 	while (order[i])
 	{
-		ft_getstat(order[i], &data);
+		this = ft_strjoin("/", order[i]);
+		this = ft_strjoin(dirname, this);
+		ft_getstat(this, &data);
 		i++;
 	}
 	return (data);

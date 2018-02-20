@@ -12,76 +12,53 @@
 
 #include "ft_ls.h"
 
+
+#include "ft_ls.h"
+
 static void	l_option(t_opt *option, char *dirname)
 {
 	t_data 	*data;
 	char	**order;
 
-	if (option->r == 0)
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabrev_ascii(order);
-		data = ft_getdata(order);
-		ft_print_l(&data);
-	}
-	else
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabascii(order);
-		data = ft_getdata(order);
-		ft_print_l(&data);
-	}
+
+	order = ft_get_lorder(dirname, option);
+	data = ft_getdata(order, dirname);
+	ft_print_l(&data);
 }
 
-static void	a_option(t_opt *option, char *dirname)
+static void	mod_option(t_opt *option, char *dirname)
 {
 	char	**order;
 
-	if (option->r == 0)
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabascii(order);
-		ft_puttab(order);
-	}
-	else
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabrev_ascii(order);
-		ft_puttab(order);
-	}
+	order = ft_get_order(dirname, option);
+	ft_puttab(order);
 }
 
 static void	upper_r_option(t_opt *option, char *dirname)
 {
 	char	**order;
+	char	**lorder;
 	t_data	*data;
 	char	*path;
 	int		i;
 
 	i = 0;
-	if (option->r == 0)
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabascii(order);
-		ft_puttab(order);
-	}
-	else
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
-		order = ft_tabrev_ascii(order);
-		ft_puttab(order);
-	}
+	order = ft_get_order(dirname, option);
 	if (option->l)
 	{
-		data = ft_getdata(order);
+		lorder = ft_get_lorder(dirname, option);
+		data = ft_getdata(lorder, dirname);
 		ft_print_l(&data);
 	}
+	else
+		ft_puttab(order);
 	while (order[i])
 	{
 		path = ft_strdup(dirname);
 		path = ft_strjoin(path, "/");
 		path = ft_strjoin(path, order[i]);
-		if (!ft_is_file(path))
+		if (!ft_is_file(path) && !ft_issame(order[i], ".") &&
+		!ft_issame(order[i], ".."))
 		{
 			ft_putchar('\n');
 			ft_putstr(path);
@@ -105,7 +82,7 @@ void		ft_f_simple(t_opt *option, char *dirname)
 			else if (option->l == 1)
 				l_option(option, dirname);
 			else if (option->a || option->r)
-				a_option(option, dirname);
+				mod_option(option, dirname);
 		}
 	}
 	else

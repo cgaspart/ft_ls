@@ -16,9 +16,9 @@ static void		ft_get_right(t_data *data, int i)
 {
 	if (i)
 		ft_putchar('\n');
-	ft_putchar(ft_type(data->name));
+	ft_putchar(data->type);
 	ft_putright(data->right);
-	ft_print_space(3, data->link);
+	ft_print_space(4, data->link);
 }
 
 static void		ft_get_blocks(t_data *data)
