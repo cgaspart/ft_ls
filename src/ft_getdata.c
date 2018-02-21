@@ -18,7 +18,7 @@ static void		my_lstadd(t_data **alst, t_data *new)
 	(*alst) = new;
 }
 
-static char		*get_name(char *this)
+static char		*get_name(char *this, int isfile)
 {
 	char	*res;
 	int 	len;
@@ -26,6 +26,8 @@ static char		*get_name(char *this)
 
 	len = ft_strlen(this);
 	i = 0;
+	if (isfile)
+		return (this);
 	if (ft_strchr(this, '/'))
 	{
 		while (this[len] != '/')
@@ -47,7 +49,7 @@ static char		*get_name(char *this)
 	return (this);
 }
 
-static void		ft_getstat(char *this, t_data **data)
+static void		ft_getstat(char *this, t_data **data, int isfile)
 {
 	struct stat			fstat;
 	struct passwd		*duser;
@@ -62,7 +64,7 @@ static void		ft_getstat(char *this, t_data **data)
 	tmp = (t_data*)malloc(sizeof(t_data));
 	duser = getpwuid(fstat.st_uid);
 	dgroup = getgrgid(fstat.st_gid);
-	tmp->name = get_name(this);
+	tmp->name = get_name(this, isfile);
 	tmp->type = ft_type(this);
 	tmp->right = ft_right(fstat);
 	tmp->link = fstat.st_nlink;
@@ -79,14 +81,24 @@ t_data			*ft_getdata(char **order, char *dirname)
 	t_data			*data;
 	char			*this;
 	int				i;
+	int				isfile;
 
 	i = 0;
+	isfile = 0;
 	data = NULL;
 	while (order[i])
 	{
-		this = ft_strjoin("/", order[i]);
-		this = ft_strjoin(dirname, this);
-		ft_getstat(this, &data);
+		if (dirname)
+		{
+			this = ft_strjoin("/", order[i]);
+			this = ft_strjoin(dirname, this);
+		}
+		else
+		{
+			this = ft_strdup(order[i]);
+			isfile = 1;
+		}
+		ft_getstat(this, &data, isfile);
 		i++;
 	}
 	return (data);

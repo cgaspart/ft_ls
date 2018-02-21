@@ -36,7 +36,7 @@ static void		ft_get_blocks(t_data *data)
 	ft_putchar('\n');
 }
 
-void			ft_print_l(t_data **data)
+void			ft_print_l(t_data **data, int total)
 {
 	int			i;
 	t_data		*ptrdata;
@@ -45,7 +45,8 @@ void			ft_print_l(t_data **data)
 	ptrdata = *data;
 	blocksdata = *data;
 	i = 0;
-	ft_get_blocks(blocksdata);
+	if (total)
+		ft_get_blocks(blocksdata);
 	while (ptrdata)
 	{
 		ft_get_right(ptrdata, i);

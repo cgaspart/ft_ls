@@ -23,7 +23,7 @@ static void	l_option(t_opt *option, char *dirname)
 
 	order = ft_get_lorder(dirname, option);
 	data = ft_getdata(order, dirname);
-	ft_print_l(&data);
+	ft_print_l(&data, 1);
 }
 
 static void	mod_option(t_opt *option, char *dirname)
@@ -48,7 +48,7 @@ static void	upper_r_option(t_opt *option, char *dirname)
 	{
 		lorder = ft_get_lorder(dirname, option);
 		data = ft_getdata(lorder, dirname);
-		ft_print_l(&data);
+		ft_print_l(&data, 1);
 	}
 	else
 		ft_puttab(order);

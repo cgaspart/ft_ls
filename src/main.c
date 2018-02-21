@@ -29,6 +29,8 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 	}
 	if (argdir[0] == NULL && argfile[0] == NULL)
 		ft_f_simple(option, ".");
+	else
+		ft_f_multi(argfile, argdir, option);
 }
 
 static void		ft_no_flag(int argc, char **argv)

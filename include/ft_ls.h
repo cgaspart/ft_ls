@@ -69,7 +69,7 @@ char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
 int					ft_arg_opt(char **argv, int argc, t_opt *option);
 t_data				*ft_getdata(char **order, char *dirname);
-void				ft_print_l(t_data **data);
+void				ft_print_l(t_data **data, int total);
 char				**ft_get_ascii_tab(char *dirname, int a_option);
 char 				**ft_nf_arg_ascii_dir(int argc, char **argv);
 char 				**ft_nf_arg_ascii_file(int argc, char **argv);
@@ -81,4 +81,5 @@ void    			ft_nf_multi(int argc, char **argv);
 void				ft_f_simple(t_opt *option, char *dirname);
 char				**ft_get_order(char *dirname, t_opt *option);
 char				**ft_get_lorder(char *dirname, t_opt *option);
+void				ft_f_multi(char **argfile, char **argdir, t_opt *option);
 #endif
