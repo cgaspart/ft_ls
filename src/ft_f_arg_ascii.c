@@ -57,22 +57,28 @@ char		**ft_f_arg_ascii_dir(int argc, char **argv)
 	char    **res;
 	int     i;
 	int     j;
+	int		error;
 
 	i = 0;
+	error = 0;
 	j = ft_skip_flag(argc, argv);
-	if (j == - 1)
-		return (NULL);
+	//if (j == - 1)
+		//return (NULL);
 	res = malloc(sizeof(char*) * argc);
 	while (j < argc)
 	{
-		if (!ft_is_file(argv[j]) && ft_error(argv[j]))
+		if (!ft_is_file(argv[j]) && (error = ft_error(argv[j])))
 		{
 			res[i] = argv[j];
 			i++;
 		}
+		if (error == 0)
+			error = 1;
 		j++;
 	}
 	res[i] = NULL;
 	res = ft_tabascii(res);
+	if (error && i == 0)
+		res[0] = ft_strdup("error");
 	return (res);
 }
