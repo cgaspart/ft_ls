@@ -12,21 +12,6 @@
 
 #include "ft_ls.h"
 
-static int	ft_skip_flag(int argc, char **argv)
-{
-	int i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (argv[i][0] == '-')
-			i++;
-		else
-			break ;
-	}
-	return (i);
-}
-
 char		**ft_f_arg_revascii_file(int argc, char **argv)
 {
 	char    **res;

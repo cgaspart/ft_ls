@@ -27,10 +27,13 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 		argdir = ft_f_arg_ascii_dir(argc, argv);
 		argfile = ft_f_arg_ascii_file(argc, argv);
 	}
-	if (!ft_strcmp(argdir[0], "error"))
+	if (argdir[0] != NULL && !ft_strcmp(argdir[0], "error"))
 		exit (0);
 	if (argdir[0] == NULL && argfile[0] == NULL)
 		ft_f_simple(option, ".");
+	else if (argfile[0] == NULL && argdir[1] == NULL &&
+		ft_skip_flag(argc, argv) == argc - 1)
+		ft_f_simple(option, argdir[0]);
 	else
 		ft_f_multi(argfile, argdir, option);
 }

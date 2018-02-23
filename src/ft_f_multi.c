@@ -56,9 +56,6 @@ void			ft_f_multi(char **argfile, char **argdir, t_opt *option)
 	{
 		if (argfile[0])
 			ft_putstr("\n");
-		if (argdir[1] == NULL)
-			ft_f_simple(option, argdir[i]);
-		else
-			multi_dir(argdir, option);
+		multi_dir(argdir, option);
 	}
 }
