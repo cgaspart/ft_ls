@@ -60,7 +60,7 @@ void			ft_simple(char *dirname)
 	if (!ft_is_file(dirname))
 	{
 		dir = opendir(dirname);
-		if (ft_error(dirname))
+		if (ft_error(dirname, 0))
 		{
 			fname = ft_tab_fname(dirname);
 			ft_puttab(ft_tabascii(fname));

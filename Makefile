@@ -36,7 +36,8 @@ SRC_NAME = main.c\
 	  ft_nf_multi.c\
 	  ft_f_simple.c\
 	  ft_get_order.c\
-	  ft_f_multi.c
+	  ft_f_multi.c\
+	  ft_get_t_tab.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

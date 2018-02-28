@@ -18,7 +18,7 @@ static void		ft_get_right(t_data *data, int i)
 		ft_putchar('\n');
 	ft_putchar(data->type);
 	ft_putright(data->right);
-	ft_print_space(4, data->link);
+	ft_print_space(3, data->link);
 }
 
 static void		ft_get_blocks(t_data *data)
@@ -53,9 +53,9 @@ void			ft_print_l(t_data **data, int total)
 		ft_putnbr(ptrdata->link);
 		ft_putchar(' ');
 		ft_putstr(ptrdata->owner);
-		ft_putchar(' ');
+		ft_print_space(3, 1);
 		ft_putstr(ptrdata->grp);
-		ft_print_space(6, ptrdata->size);
+		ft_print_space(5, ptrdata->size);
 		ft_putnbr(ptrdata->size);
 		ft_putchar(' ');
 		ft_putstr(ptrdata->date);

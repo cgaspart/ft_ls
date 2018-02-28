@@ -48,7 +48,6 @@ static char		**ft_tab_fname(char *dirname, int a_option)
 			res[i] = ft_strdup(file->d_name);
 			i++;
 		}
-
 		else if (file->d_name[0] != '.')
 		{
 			res[i] = ft_strdup(file->d_name);

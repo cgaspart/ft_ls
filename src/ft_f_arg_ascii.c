@@ -47,12 +47,10 @@ char		**ft_f_arg_ascii_dir(int argc, char **argv)
 	i = 0;
 	error = 0;
 	j = ft_skip_flag(argc, argv);
-	//if (j == - 1)
-		//return (NULL);
 	res = malloc(sizeof(char*) * argc);
 	while (j < argc)
 	{
-		if (!ft_is_file(argv[j]) && (error = ft_error(argv[j])))
+		if (!ft_is_file(argv[j]) && (error = ft_error(argv[j], 0)))
 		{
 			res[i] = argv[j];
 			i++;

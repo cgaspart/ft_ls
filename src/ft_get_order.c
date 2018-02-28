@@ -33,15 +33,12 @@ char	**ft_get_order(char *dirname, t_opt *option)
 {
 	char **order;
 
-	if (option->r == 0)
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
+	order = ft_get_ascii_tab(dirname, option->a);
+	if (option->t)
+		order = ft_get_t_tab(dirname, order, option->r);
+	else if (option->r == 0 && option->t == 0)
 		order = ft_tabascii(order);
-	}
 	else
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
 		order = ft_tabrev_ascii(order);
-	}
 	return (order);
 }

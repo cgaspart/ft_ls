@@ -88,4 +88,5 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_issame(char *first, char *second);
 int					ft_skip_flag(int argc, char **argv);
+int					ft_tablen(char **tab);
 #endif

@@ -44,9 +44,22 @@ static char		*get_name(char *this, int isfile)
 			i++;
 		}
 		res[i] = '\0';
+		free(this);
 		return (res);
 	}
 	return (this);
+}
+
+char			*islink(char *name, char *this)
+{
+	char buf[255];
+	int cc;
+
+	cc = readlink(this, buf, BUFSIZ);
+	buf[cc] = '\0';
+	name = ft_strjoin(name, " -> ");
+	name = ft_strjoin(name, buf);
+	return (name);
 }
 
 static void		ft_getstat(char *this, t_data **data, int isfile)
@@ -56,7 +69,7 @@ static void		ft_getstat(char *this, t_data **data, int isfile)
 	struct group		*dgroup;
 	t_data				*tmp;
 
-	if (stat(this, &fstat) == -1)
+	if (lstat(this, &fstat) == -1)
 	{
 		perror("");
 		exit(0);
@@ -66,6 +79,8 @@ static void		ft_getstat(char *this, t_data **data, int isfile)
 	dgroup = getgrgid(fstat.st_gid);
 	tmp->name = get_name(this, isfile);
 	tmp->type = ft_type(this);
+	if (tmp->type == 'l')
+		tmp->name = islink(tmp->name, this);
 	tmp->right = ft_right(fstat);
 	tmp->link = fstat.st_nlink;
 	tmp->owner = ft_strdup(duser->pw_name);

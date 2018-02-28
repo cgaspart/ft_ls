@@ -17,7 +17,7 @@ int		ft_is_file(char *dirname)
 	struct stat fstat;
 
 	if (stat(dirname, &fstat) == -1)
-		return (0);
+		return (-1);
 	if (S_ISREG(fstat.st_mode))
 		return (1);
 	if (S_ISSOCK(fstat.st_mode))

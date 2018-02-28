@@ -46,7 +46,7 @@ char        **ft_nf_arg_ascii_dir(int argc, char **argv)
 	res = malloc(sizeof(char*) * argc);
 	while (j < argc)
 	{
-		if (!ft_is_file(argv[j]) && ft_error(argv[j]))
+		if (!ft_is_file(argv[j]) && ft_error(argv[j], 0))
 		{
 			res[i] = argv[j];
 			i++;

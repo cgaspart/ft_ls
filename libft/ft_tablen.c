@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 00:58:25 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/02/08 00:58:28 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/02/28 15:52:56 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/02/28 15:52:59 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int				ft_error(char *dirname, int space)
+int		ft_tablen(char **tab)
 {
-	DIR		*dir;
+	int i;
 
-	dir = opendir(dirname);
-	if (dir == NULL)
-	{
-		if (space)
-			ft_putchar('\n');
-		ft_putstr("ft_ls: ");
-		ft_putstr(dirname);
-		ft_putstr(": ");
-		perror("");
-		return (0);
-	}
-	closedir(dir);
-	return (1);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

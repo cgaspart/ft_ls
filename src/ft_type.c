@@ -16,19 +16,22 @@ char	ft_type(char *dirname)
 {
 	struct stat fstat;
 
-	if (stat(dirname, &fstat) == -1)
+	if (lstat(dirname, &fstat) == -1)
 		return (0);
 	if (S_ISDIR(fstat.st_mode))
 		return ('d');
-	if (S_ISREG(fstat.st_mode))
-		return ('-');
-	if (S_ISSOCK(fstat.st_mode))
+	else if (S_ISLNK(fstat.st_mode))
+		return('l');
+	else if (S_ISSOCK(fstat.st_mode))
 		return ('s');
-	if (S_ISFIFO(fstat.st_mode))
+	else if (S_ISFIFO(fstat.st_mode))
 		return ('p');
-	if (S_ISCHR(fstat.st_mode))
+	else if (S_ISCHR(fstat.st_mode))
 		return ('c');
-	if (S_ISBLK(fstat.st_mode))
+	else if (S_ISBLK(fstat.st_mode))
 		return ('b');
-	return (0);
+	else if (S_ISREG(fstat.st_mode))
+		return ('-');
+	else
+		return (0);
 }

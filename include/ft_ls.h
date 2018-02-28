@@ -63,7 +63,7 @@ t_right				*ft_right(struct stat fstat);
 void				ft_putright(t_right *right);
 void				ft_simple(char	*dirname);
 char				*ft_date_converter(char *time);
-int					ft_error(char *dirname);
+int					ft_error(char *dirname, int space);
 int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
@@ -82,4 +82,5 @@ void				ft_f_simple(t_opt *option, char *dirname);
 char				**ft_get_order(char *dirname, t_opt *option);
 char				**ft_get_lorder(char *dirname, t_opt *option);
 void				ft_f_multi(char **argfile, char **argdir, t_opt *option);
+char				**ft_get_t_tab(char *dirname, char **order, int r_opt);
 #endif

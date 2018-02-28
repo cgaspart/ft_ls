@@ -12,9 +12,6 @@
 
 #include "ft_ls.h"
 
-
-#include "ft_ls.h"
-
 static void	l_option(t_opt *option, char *dirname)
 {
 	t_data 	*data;
@@ -58,7 +55,7 @@ static void	upper_r_option(t_opt *option, char *dirname)
 		path = ft_strjoin(path, "/");
 		path = ft_strjoin(path, order[i]);
 		if (!ft_is_file(path) && !ft_issame(order[i], ".") &&
-		!ft_issame(order[i], ".."))
+		!ft_issame(order[i], "..") && ft_error(path, 1))
 		{
 			ft_putchar('\n');
 			ft_putstr(path);
@@ -75,13 +72,13 @@ void		ft_f_simple(t_opt *option, char *dirname)
 {
 	if (!ft_is_file(dirname))
 	{
-		if (ft_error(dirname))
+		if (ft_error(dirname, 0))
 		{
 			if (option->upper_r)
 				upper_r_option(option, dirname);
 			else if (option->l == 1)
 				l_option(option, dirname);
-			else if (option->a || option->r)
+			else if (option->a || option->r || option->t)
 				mod_option(option, dirname);
 		}
 	}
