@@ -16,16 +16,13 @@ char	**ft_get_lorder(char *dirname, t_opt *option)
 {
 	char **order;
 
-	if (option->r == 0)
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
+	order = ft_get_ascii_tab(dirname, option->a);
+	if (option->t)
+		order = ft_get_t_tab(dirname, order, !option->r);
+	else if (option->r == 0)
 		order = ft_tabrev_ascii(order);
-	}
 	else
-	{
-		order = ft_get_ascii_tab(dirname, option->a);
 		order = ft_tabascii(order);
-	}
 	return (order);
 }
 
