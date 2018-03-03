@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strascii.c                                      :+:      :+:    :+:   */
+/*   ft_strswitch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 12:57:03 by cgaspart          #+#    #+#             */
-/*   Updated: 2017/12/20 11:18:46 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/03/03 17:00:43 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/03/03 17:00:44 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_tabascii(char **tab)
+void	ft_strswitch(char **str1, char **str2)
 {
-	int		i;
-	char	*buff;
+	char *buffer;
 
-	i = 0;
-	while (tab[i])
-	{
-		if (tab[i + 1] && ft_strcmp(tab[i], tab[i + 1]) > 0)
-		{
-			buff = ft_strdup(tab[i]);
-			tab[i] = ft_strdup(tab[i + 1]);
-			tab[i + 1] = ft_strdup(buff);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	return (tab);
+	buffer = ft_strdup(*str1);
+	*str1 = ft_strdup(*str2);
+	*str2 = ft_strdup(buffer);
+	free(buffer);
 }

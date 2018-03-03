@@ -89,4 +89,9 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_issame(char *first, char *second);
 int					ft_skip_flag(int argc, char **argv);
 int					ft_tablen(char **tab);
+char				*ft_add_str_path(char *str, char *dirname);
+char				**ft_add_tab_path(char **tab, char *dirname);
+char				*ft_rm_str_path(char *str);
+char				**ft_rm_tab_path(char **tab);
+void				ft_strswitch(char **str1, char **str2);
 #endif

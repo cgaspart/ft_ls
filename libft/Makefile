@@ -78,7 +78,10 @@ SRC_NAME = ft_putchar.c\
 	  ft_issame.c\
 	  ft_tabrev_ascii.c\
 	  ft_skip_flag.c\
-	  ft_tablen.c
+	  ft_tablen.c\
+	  ft_add_path.c\
+	  ft_rm_path.c\
+	  ft_strswitch.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

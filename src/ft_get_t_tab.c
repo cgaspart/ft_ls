@@ -12,23 +12,9 @@
 
 #include "ft_ls.h"
 
-static char		**add_path(char **order, char *dirname)
-{
-	int i;
-
-	i = 0;
-	while (order[i])
-	{
-		order[i] = ft_strjoin("/", order[i]);
-		order[i] = ft_strjoin(dirname, order[i]);
-		i++;
-	}
-	return (order);
-}
-
 static time_t	get_time(char *this)
 {
-	struct stat		fstat;;
+	struct stat		fstat;
 
 	if (lstat(this, &fstat) == -1)
 	{
@@ -38,38 +24,68 @@ static time_t	get_time(char *this)
 	return (*(&fstat.st_mtime));
 }
 
-char			**ft_get_t_tab(char *dirname, char **order, int r_opt)
+static char		**get_t_order(char **order)
 {
 	int		i;
-	char 	*buffer;
 
 	i = 0;
-	order = add_path(order, dirname);
 	while (order[i])
 	{
-		if (r_opt == 0)
+		if (order[i + 1] && get_time(order[i]) < get_time(order[i + 1]))
 		{
-			if (order[i + 1] && get_time(order[i]) < get_time(order[i + 1]))
+			ft_strswitch(&order[i], &order[i + 1]);
+			i = 0;
+		}
+		else if (order[i + 1] && get_time(order[i]) == get_time(order[i + 1]))
+		{
+			if (ft_strcmp(order[i], order[i + 1]) > 0)
 			{
-				buffer = ft_strdup(order[i]);
-				order[i] = ft_strdup(order[i + 1]);
-				order[i + 1] = ft_strdup(buffer);
-				free(buffer);
+				ft_strswitch(&order[i], &order[i + 1]);
 				i = 0;
 			}
+			else
+				i++;
 		}
 		else
-		{
-			if (order[i + 1] && get_time(order[i]) > get_time(order[i + 1]))
-			{
-				buffer = ft_strdup(order[i]);
-				order[i] = ft_strdup(order[i + 1]);
-				order[i + 1] = ft_strdup(buffer);
-				free(buffer);
-				i = 0;
-			}
-		}
-		i++;
+			i++;
 	}
 	return (order);
+}
+
+static char		**get_t_revorder(char **order)
+{
+	int		i;
+
+	i = 0;
+	while (order[i])
+	{
+		if (order[i + 1] && get_time(order[i]) > get_time(order[i + 1]))
+		{
+			ft_strswitch(&order[i], &order[i + 1]);
+			i = 0;
+		}
+		else if (order[i + 1] && get_time(order[i]) == get_time(order[i + 1]))
+		{
+			if (ft_strcmp(order[i], order[i + 1]) < 0)
+			{
+				ft_strswitch(&order[i], &order[i + 1]);
+				i = 0;
+			}
+			else
+				i++;
+		}
+		else
+			i++;
+	}
+	return (order);
+}
+
+char			**ft_get_t_tab(char *dirname, char **order, int r_opt)
+{
+	order = ft_add_tab_path(order, dirname);
+	if (r_opt == 0)
+		order = get_t_order(order);
+	else
+		order = get_t_revorder(order);
+	return (ft_rm_tab_path(order));
 }
