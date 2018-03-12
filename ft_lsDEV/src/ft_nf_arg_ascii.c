@@ -23,7 +23,7 @@ char 		**ft_nf_arg_ascii_file(int argc, char **argv)
 	res = malloc(sizeof(char*) * argc);
 	while (j < argc)
 	{
-		if (ft_is_file(argv[j]))
+		if (ft_is_file(argv[j]) && ft_error(argv[j], 0))
 		{
 			res[i] = argv[j];
 			i++;
@@ -31,7 +31,8 @@ char 		**ft_nf_arg_ascii_file(int argc, char **argv)
 		j++;
 	}
 	res[i] = NULL;
-	res = ft_tabascii(res);
+	if (res[0] != NULL)
+		res = ft_tabascii(res);
 	return (res);
 }
 

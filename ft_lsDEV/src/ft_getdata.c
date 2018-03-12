@@ -61,7 +61,8 @@ void			ft_getdata(char **order, char *dirname)
 	data->grplen = 0;
 	data->size = 0;
 	data->blocks = 0;
-	order = ft_add_tab_path(order, dirname);
+	if (dirname != NULL)
+		order = ft_add_tab_path(order, dirname);
 	ft_getstat(order, data);
 	ft_print_l(data, !ft_is_file(dirname), order);
 }
