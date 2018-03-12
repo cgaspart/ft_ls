@@ -20,33 +20,10 @@ static void		my_lstadd(t_data **alst, t_data *new)
 
 static char		*get_name(char *this, int isfile)
 {
-	char	*res;
-	int 	len;
-	int 	i;
-
-	len = ft_strlen(this);
-	i = 0;
 	if (isfile)
 		return (this);
-	if (ft_strchr(this, '/'))
-	{
-		while (this[len] != '/')
-		{
-			i++;
-			len--;
-		}
-		res = malloc(sizeof(char) * i + 1);
-		i = 0;
-		len++;
-		while (this[len + i] != '\0')
-		{
-			res[i] = this[len + i];
-			i++;
-		}
-		res[i] = '\0';
-		free(this);
-		return (res);
-	}
+	else
+		return (ft_rm_str_path(this));
 	return (this);
 }
 
@@ -83,8 +60,16 @@ static void		ft_getstat(char *this, t_data **data, int isfile)
 		tmp->name = islink(tmp->name, this);
 	tmp->right = ft_right(fstat);
 	tmp->link = fstat.st_nlink;
-	tmp->owner = ft_strdup(duser->pw_name);
-	tmp->grp = ft_strdup(dgroup->gr_name);
+	if (duser == NULL || dgroup == NULL)
+	{
+		tmp->owner = ft_itoa(fstat.st_uid);
+		tmp->grp = ft_itoa(fstat.st_uid);
+	}
+	else
+	{
+		tmp->owner = ft_strdup(duser->pw_name);
+		tmp->grp = ft_strdup(dgroup->gr_name);
+	}
 	tmp->size = fstat.st_size;
 	tmp->blocks = fstat.st_blocks;
 	tmp->date = ft_date_converter(ctime(&fstat.st_mtime));
