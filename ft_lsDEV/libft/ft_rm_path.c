@@ -12,35 +12,42 @@
 
 #include "libft.h"
 
-char	*ft_rm_str_path(char *str)
+char	*path_remover(char *str)
 {
 	char	*res;
-	int 	len;
+	int		len;
+	int		i;
+
+	len = ft_strlen(str);
+	i = 0;
+	while (str[len] != '/')
+	{
+		i++;
+		len--;
+	}
+	res = malloc(sizeof(char) * i + 1);
+	i = 0;
+	len++;
+	while (str[len + i] != '\0')
+	{
+		res[i] = str[len + i];
+		i++;
+	}
+	res[i] = '\0';
+	free(str);
+	return (res);
+}
+
+char	*ft_rm_str_path(char *str)
+{
 	int 	i;
 
 	if (str == NULL)
 		return (NULL);
-	len = ft_strlen(str);
+
 	i = 0;
 	if (ft_strchr(str, '/'))
-	{
-		while (str[len] != '/')
-		{
-			i++;
-			len--;
-		}
-		res = malloc(sizeof(char) * i + 1);
-		i = 0;
-		len++;
-		while (str[len + i] != '\0')
-		{
-			res[i] = str[len + i];
-			i++;
-		}
-		res[i] = '\0';
-		free(str);
-		return (res);
-	}
+		return (path_remover(str));
 	return (str);
 }
 

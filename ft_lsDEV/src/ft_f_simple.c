@@ -39,9 +39,7 @@ static void	upper_r_option(t_opt *option, char *dirname)
 	i = 0;
 	order = ft_get_order(dirname, option);
 	if (option->l)
-	{
 		ft_getdata(order, dirname);
-	}
 	else
 		ft_puttab(order);
 	while (order[i])

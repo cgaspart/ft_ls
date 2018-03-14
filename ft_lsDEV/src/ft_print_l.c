@@ -87,11 +87,21 @@ void			ft_print_l(t_data *data, int total, char **order)
 		{
 			ft_putstr(ft_itoa(fstat.st_uid));
 			ft_print_space(data->ownerlen + 2, ft_intlen(fstat.st_uid));
-			ft_putstr(dgroup->gr_name);
-			ft_print_space(data->grplen + 2, ft_strlen(dgroup->gr_name));
+			ft_putstr(ft_itoa(fstat.st_gid));
+			ft_print_space(data->grplen + 2, ft_intlen(fstat.st_gid));
 		}
-		ft_print_space(data->size, ft_intlen(fstat.st_size));
-		ft_putnbr(fstat.st_size);
+		if (ft_type(order[i]) == 'c' || ft_type(order[i]) == 'b')
+		{
+			ft_putnbr(major(fstat.st_rdev));
+			ft_putchar(',');
+			ft_print_space(4, ft_intlen(minor(fstat.st_rdev)));
+			ft_putnbr(minor(fstat.st_rdev));
+		}
+		else
+		{
+			ft_print_space(data->size, ft_intlen(fstat.st_size));
+			ft_putnbr(fstat.st_size);
+		}
 		ft_putchar(' ');
 		ft_putstr(ft_date_converter(ctime(&fstat.st_mtime)));
 		ft_putchar(' ');

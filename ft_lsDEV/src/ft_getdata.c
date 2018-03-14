@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-static void		ft_getstat(char **order, t_data *data)
+static int		ft_getstat(char **order, t_data *data)
 {
 	struct stat			fstat;
 	struct passwd		*duser;
@@ -25,7 +25,7 @@ static void		ft_getstat(char **order, t_data *data)
 		if (lstat(order[i], &fstat) == -1)
 		{
 			perror("");
-			exit(0);
+			return (0);
 		}
 		duser = getpwuid(fstat.st_uid);
 		dgroup = getgrgid(fstat.st_gid);
@@ -47,6 +47,7 @@ static void		ft_getstat(char **order, t_data *data)
 		data->blocks = data->blocks + fstat.st_blocks;
 		i++;
 	}
+	return (1);
 }
 
 void			ft_getdata(char **order, char *dirname)
@@ -63,6 +64,6 @@ void			ft_getdata(char **order, char *dirname)
 	data->blocks = 0;
 	if (dirname != NULL)
 		order = ft_add_tab_path(order, dirname);
-	ft_getstat(order, data);
-	ft_print_l(data, !ft_is_file(dirname), order);
+	if (ft_getstat(order, data))
+		ft_print_l(data, !ft_is_file(dirname), order);
 }

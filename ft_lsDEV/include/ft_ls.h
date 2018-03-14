@@ -39,9 +39,6 @@ typedef struct		s_opt
 	int				a;
 	int				r;
 	int				t;
-	int				u;
-	int				f;
-	int				g;
 }					t_opt;
 
 typedef struct		s_data
