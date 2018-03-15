@@ -95,4 +95,5 @@ char				*ft_rm_str_path(char *str);
 char				**ft_rm_tab_path(char **tab);
 void				ft_strswitch(char **str1, char **str2);
 int					ft_intlen(int nbr);
+void				ft_free_tab(char **tab);
 #endif

@@ -65,6 +65,7 @@ void			ft_simple(char *dirname)
 			fname = ft_tab_fname(dirname);
 			ft_puttab(ft_tabascii(fname));
 			closedir(dir);
+			//ft_free_tab(fname);
 		}
 	}
 	else if (ft_error(dirname, 0))

@@ -25,6 +25,7 @@ char	**ft_tabascii(char **tab)
 			buff = ft_strdup(tab[i]);
 			tab[i] = ft_strdup(tab[i + 1]);
 			tab[i + 1] = ft_strdup(buff);
+			free(buff);
 			i = 0;
 		}
 		else

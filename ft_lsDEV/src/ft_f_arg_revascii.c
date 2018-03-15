@@ -14,9 +14,9 @@
 
 char		**ft_f_arg_revascii_file(int argc, char **argv)
 {
-	char    **res;
-	int     i;
-	int     j;
+	char		**res;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = ft_skip_flag(argc, argv);
@@ -40,10 +40,10 @@ char		**ft_f_arg_revascii_file(int argc, char **argv)
 
 char		**ft_f_arg_revascii_dir(int argc, char **argv)
 {
-	char    **res;
-	int     i;
-	int     j;
-	int		error;
+	char		**res;
+	int			i;
+	int			j;
+	int			error;
 
 	i = 0;
 	error = 0;

@@ -17,7 +17,7 @@ static void		usage(char opt)
 	ft_putstr("ft_ls: illegal option -- ");
 	ft_putchar(opt);
 	ft_putstr("\nusage: ft_ls [-Ralrt] [file ...]\n");
-	exit (1);
+	exit(1);
 }
 
 static void		checker(char opt)

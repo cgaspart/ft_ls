@@ -40,11 +40,10 @@ char	*path_remover(char *str)
 
 char	*ft_rm_str_path(char *str)
 {
-	int 	i;
+	int i;
 
 	if (str == NULL)
 		return (NULL);
-
 	i = 0;
 	if (ft_strchr(str, '/'))
 		return (path_remover(str));

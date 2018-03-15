@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabrev_ascii.c                                  :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgaspart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 14:05:50 by cgaspart          #+#    #+#             */
-/*   Updated: 2018/02/12 14:05:52 by cgaspart         ###   ########.fr       */
+/*   Created: 2018/03/15 17:36:42 by cgaspart          #+#    #+#             */
+/*   Updated: 2018/03/15 17:36:44 by cgaspart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_tabrev_ascii(char **tab)
+void	ft_free_tab(char **tab)
 {
-	int		i;
-	char	*buff;
-	char	*buff2;
+	int i;
 
 	i = 0;
-	while (tab[i])
+	if (tab[1] == NULL)
+		free(tab);
+	else if (tab != NULL)
 	{
-		if (tab[i + 1] && ft_strcmp(tab[i], tab[i + 1]) < 0)
+		ft_puttab(tab);
+		while (tab[i])
 		{
-			buff = ft_strdup(tab[i]);
-			buff2 = ft_strdup(tab[i + 1]);
-			tab[i] = ft_strdup(buff2);
-			tab[i + 1] = ft_strdup(buff);
-			i = 0;
-		}
-		else
+			free(tab[i]);
 			i++;
+		}
+		free(tab);
 	}
-	return (tab);
 }

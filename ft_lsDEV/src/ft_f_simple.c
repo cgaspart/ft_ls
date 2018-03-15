@@ -18,7 +18,7 @@ static void	l_option(t_opt *option, char *dirname)
 
 	order = ft_get_order(dirname, option);
 	ft_getdata(order, dirname);
-	free(order);
+	//ft_free_tab(order);
 }
 
 static void	mod_option(t_opt *option, char *dirname)
@@ -27,7 +27,27 @@ static void	mod_option(t_opt *option, char *dirname)
 
 	order = ft_get_order(dirname, option);
 	ft_puttab(order);
-	free(order);
+	//ft_free_tab(order);
+}
+
+static char	*upper_r_checker(char *this, char *dirname)
+{
+	char	*path;
+
+	path = ft_strdup(dirname);
+	if (!ft_issame(path, "/"))
+		path = ft_strjoin(path, "/");
+	path = ft_strjoin(path, this);
+	if (!ft_is_file(path) && !ft_issame(this, ".") &&
+	!ft_issame(this, "..") && ft_error(path, 1))
+	{
+		ft_putchar('\n');
+		ft_putstr(path);
+		ft_putstr(":\n");
+		return (path);
+	}
+	else
+		return (NULL);
 }
 
 static void	upper_r_option(t_opt *option, char *dirname)
@@ -44,21 +64,15 @@ static void	upper_r_option(t_opt *option, char *dirname)
 		ft_puttab(order);
 	while (order[i])
 	{
-		path = ft_strdup(dirname);
-		if (!ft_issame(path, "/"))
-			path = ft_strjoin(path, "/");
-		path = ft_strjoin(path, order[i]);
-		if (!ft_is_file(path) && !ft_issame(order[i], ".") &&
-		!ft_issame(order[i], "..") && ft_error(path, 1))
+		path = upper_r_checker(order[i], dirname);
+		if (path != NULL)
 		{
-			ft_putchar('\n');
-			ft_putstr(path);
-			ft_putstr(":\n");
 			upper_r_option(option, path);
 			free(path);
 		}
 		i++;
 	}
+	//ft_free_tab(order);
 	return ;
 }
 

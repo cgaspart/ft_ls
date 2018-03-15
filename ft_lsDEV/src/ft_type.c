@@ -21,7 +21,7 @@ char	ft_type(char *dirname)
 	if (S_ISDIR(fstat.st_mode))
 		return ('d');
 	else if (S_ISLNK(fstat.st_mode))
-		return('l');
+		return ('l');
 	else if (S_ISSOCK(fstat.st_mode))
 		return ('s');
 	else if (S_ISFIFO(fstat.st_mode))

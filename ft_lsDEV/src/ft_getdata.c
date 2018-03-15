@@ -12,11 +12,29 @@
 
 #include "ft_ls.h"
 
+static void		user_group_checker(struct stat fstat, t_data *data)
+{
+	struct passwd		*duser;
+	struct group		*dgroup;
+
+	duser = getpwuid(fstat.st_uid);
+	dgroup = getgrgid(fstat.st_gid);
+	if (duser == NULL || dgroup == NULL)
+	{
+		if (ft_intlen(fstat.st_uid) > data->ownerlen)
+			data->ownerlen = ft_intlen(fstat.st_uid);
+		if (ft_intlen(fstat.st_gid) > data->grplen)
+			data->grplen = ft_intlen(fstat.st_gid);
+	}
+	if (duser != NULL && (int)ft_strlen(duser->pw_name) > data->ownerlen)
+		data->ownerlen = ft_strlen(duser->pw_name);
+	if (dgroup != NULL && (int)ft_strlen(dgroup->gr_name) > data->grplen)
+		data->grplen = ft_strlen(dgroup->gr_name);
+}
+
 static int		ft_getstat(char **order, t_data *data)
 {
 	struct stat			fstat;
-	struct passwd		*duser;
-	struct group		*dgroup;
 	int					i;
 
 	i = 0;
@@ -27,21 +45,9 @@ static int		ft_getstat(char **order, t_data *data)
 			perror("");
 			return (0);
 		}
-		duser = getpwuid(fstat.st_uid);
-		dgroup = getgrgid(fstat.st_gid);
 		if (ft_intlen(fstat.st_nlink) > data->link)
 			data->link = ft_intlen(fstat.st_nlink);
-		if (duser == NULL || dgroup == NULL)
-		{
-			if (ft_intlen(fstat.st_uid) > data->ownerlen)
-				data->ownerlen = ft_intlen(fstat.st_uid);
-			if (ft_intlen(fstat.st_gid) > data->grplen)
-				data->grplen = ft_intlen(fstat.st_gid);
-		}
-		if (duser != NULL && (int)ft_strlen(duser->pw_name) > data->ownerlen)
-			data->ownerlen = ft_strlen(duser->pw_name);
-		if (dgroup != NULL && (int)ft_strlen(dgroup->gr_name) > data->grplen)
-			data->grplen = ft_strlen(dgroup->gr_name);
+		user_group_checker(fstat, data);
 		if (ft_intlen(fstat.st_size) > data->size)
 			data->size = ft_intlen(fstat.st_size);
 		data->blocks = data->blocks + fstat.st_blocks;

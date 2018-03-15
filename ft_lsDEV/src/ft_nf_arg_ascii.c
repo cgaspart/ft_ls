@@ -12,11 +12,11 @@
 
 #include "ft_ls.h"
 
-char 		**ft_nf_arg_ascii_file(int argc, char **argv)
+char		**ft_nf_arg_ascii_file(int argc, char **argv)
 {
-	char    **res;
-	int     i;
-	int     j;
+	char	**res;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 1;
@@ -36,11 +36,11 @@ char 		**ft_nf_arg_ascii_file(int argc, char **argv)
 	return (res);
 }
 
-char        **ft_nf_arg_ascii_dir(int argc, char **argv)
+char		**ft_nf_arg_ascii_dir(int argc, char **argv)
 {
-	char    **res;
-	int     i;
-	int     j;
+	char	**res;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 1;

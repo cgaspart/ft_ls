@@ -111,7 +111,7 @@ void			ft_print_l(t_data *data, int total, char **order)
 			ft_putstr(name);
 		i++;
 	}
-	free(data);
+	//free(data);
 	ft_rm_tab_path(order);
 	ft_putchar('\n');
 }

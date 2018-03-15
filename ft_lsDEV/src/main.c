@@ -12,13 +12,26 @@
 
 #include "ft_ls.h"
 
+static void		arg_checker(char **argdir, char **argfile)
+{
+	int error;
+
+	error = 1;
+	if (argdir[0] != NULL && !ft_strcmp(argdir[0], "error"))
+		error = 0;
+	if (argdir[0] == NULL && argfile[0] == NULL && !error)
+	{
+		//ft_free_tab(argdir);
+		//ft_free_tab(argfile);
+		exit(0);
+	}
+}
+
 static void		ft_flag(int argc, char **argv, t_opt *option)
 {
 	char	**argfile;
 	char	**argdir;
-	int		error;
 
-	error = 1;
 	if (option->r == 1)
 	{
 		argfile = ft_f_arg_revascii_file(argc, argv);
@@ -29,14 +42,7 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 		argdir = ft_f_arg_ascii_dir(argc, argv);
 		argfile = ft_f_arg_ascii_file(argc, argv);
 	}
-	if (argdir[0] != NULL && !ft_strcmp(argdir[0], "error"))
-		error = 0;
-	if (argdir[0] == NULL && argfile[0] == NULL && !error)
-	{
-		free(argdir);
-		free(argfile);
-		exit (0);
-	}
+	arg_checker(argdir, argfile);
 	if (argdir[0] == NULL && argfile[0] == NULL)
 		ft_f_simple(option, ".");
 	else if (argfile[0] == NULL && argdir[1] == NULL &&
@@ -44,8 +50,8 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 		ft_f_simple(option, argdir[0]);
 	else
 		ft_f_multi(argfile, argdir, option);
-	free(argdir);
-	free(argfile);
+	//ft_free_tab(argdir);
+	//ft_free_tab(argfile);
 }
 
 static void		ft_no_flag(int argc, char **argv)
