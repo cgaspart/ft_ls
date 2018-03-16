@@ -38,7 +38,7 @@ static char	*upper_r_checker(char *this, char *dirname)
 	if (!ft_issame(path, "/"))
 		path = ft_strjoin(path, "/");
 	path = ft_strjoin(path, this);
-	if (!ft_is_file(path) && !ft_issame(this, ".") &&
+	if (ft_type(path) == 'd' && !ft_issame(this, ".") &&
 	!ft_issame(this, "..") && ft_error(path, 1))
 	{
 		ft_putchar('\n');
