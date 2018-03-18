@@ -12,22 +12,14 @@
 
 #include "ft_ls.h"
 
-static void	l_option(t_opt *option, char *dirname)
+static void	l_option(char *dirname, char **order)
 {
-	char	**order;
-
-	order = ft_get_order(dirname, option);
 	ft_getdata(order, dirname);
-	//ft_free_tab(order);
 }
 
-static void	mod_option(t_opt *option, char *dirname)
+static void	mod_option(char **order)
 {
-	char	**order;
-
-	order = ft_get_order(dirname, option);
 	ft_puttab(order);
-	//ft_free_tab(order);
 }
 
 static char	*upper_r_checker(char *this, char *dirname)
@@ -72,22 +64,26 @@ static void	upper_r_option(t_opt *option, char *dirname)
 		}
 		i++;
 	}
-	//ft_free_tab(order);
+	ft_free_tab(order);
 	return ;
 }
 
 void		ft_f_simple(t_opt *option, char *dirname)
 {
+	char **order;
+
 	if (!ft_is_file(dirname))
 	{
 		if (ft_error(dirname, 0))
 		{
+			order = ft_get_order(dirname, option);
 			if (option->upper_r)
 				upper_r_option(option, dirname);
 			else if (option->l == 1)
-				l_option(option, dirname);
+				l_option(dirname, order);
 			else if (option->a || option->r || option->t)
-				mod_option(option, dirname);
+				mod_option(order);
+			ft_free_tab(order);
 		}
 	}
 	else

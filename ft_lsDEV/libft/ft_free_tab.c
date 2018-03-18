@@ -21,12 +21,12 @@ void	ft_free_tab(char **tab)
 		free(tab);
 	else if (tab != NULL)
 	{
-		ft_puttab(tab);
 		while (tab[i])
 		{
 			free(tab[i]);
 			i++;
 		}
 		free(tab);
+		tab = NULL;
 	}
 }
