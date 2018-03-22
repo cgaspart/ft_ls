@@ -28,8 +28,10 @@ static char	*upper_r_checker(char *this, char *dirname)
 
 	path = ft_strdup(dirname);
 	if (!ft_issame(path, "/"))
-		path = ft_strjoin(path, "/");
-	path = ft_strjoin(path, this);
+		path = ft_str_fjoin(path, "/", 1);
+	ft_putstr("up_rchck_strjoin 1\n");
+	path = ft_str_fjoin(path, this, 1);
+	ft_putstr("up_rchck_strjoin 2\n");
 	if (ft_type(path) == 'd' && !ft_issame(this, ".") &&
 	!ft_issame(this, "..") && ft_error(path, 1))
 	{
@@ -39,7 +41,16 @@ static char	*upper_r_checker(char *this, char *dirname)
 		return (path);
 	}
 	else
+	{
+		ft_putstr("up_rchck_else 1\n");
+		if (path != NULL)
+		{
+			free(path);
+			path = NULL;
+		}
+		ft_putstr("up_rchck_else 2\n");
 		return (NULL);
+	}
 }
 
 static void	upper_r_option(t_opt *option, char *dirname)
@@ -56,11 +67,14 @@ static void	upper_r_option(t_opt *option, char *dirname)
 		ft_puttab(order);
 	while (order[i])
 	{
+		ft_putstr("up_ropt 1\n");
 		path = upper_r_checker(order[i], dirname);
+		ft_putstr("up_ropt 2\n");
 		if (path != NULL)
 		{
 			upper_r_option(option, path);
 			free(path);
+			path = NULL;
 		}
 		i++;
 	}

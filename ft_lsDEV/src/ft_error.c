@@ -12,9 +12,9 @@
 
 #include "ft_ls.h"
 
-static void		print_error(char *dirname, int space)
+static void		print_error(char *dirname, int nl)
 {
-	if (space)
+	if (nl)
 		ft_putchar('\n');
 	ft_putstr("ft_ls: ");
 	ft_putstr(dirname);
@@ -22,19 +22,19 @@ static void		print_error(char *dirname, int space)
 	perror("");
 }
 
-int				ft_error(char *dirname, int space)
+int				ft_error(char *dirname, int nl)
 {
 	DIR		*dir;
 
 	dir = opendir(dirname);
 	if (ft_is_file(dirname) == -1)
 	{
-		print_error(dirname, space);
+		print_error(dirname, nl);
 		return (0);
 	}
 	if (dir == NULL && ft_type(dirname) == 'd')
 	{
-		print_error(dirname, space);
+		print_error(dirname, nl);
 		return (0);
 	}
 	if (dir != NULL)

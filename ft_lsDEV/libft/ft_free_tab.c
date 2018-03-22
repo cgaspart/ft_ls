@@ -17,16 +17,26 @@ void	ft_free_tab(char **tab)
 	int i;
 
 	i = 0;
-	if (tab[1] == NULL)
+	if (tab[1] == NULL && tab[0] != NULL)
+	{
 		free(tab);
+		tab = NULL;
+	}
 	else if (tab != NULL)
 	{
 		while (tab[i])
 		{
-			free(tab[i]);
+			if (tab[i] != NULL)
+			{
+				free(tab[i]);
+				tab[i] = NULL;
+			}
 			i++;
 		}
-		free(tab);
-		tab = NULL;
+		if (tab[i] != NULL)
+		{
+			free(tab);
+			tab = NULL;
+		}
 	}
 }
