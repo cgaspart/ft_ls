@@ -56,7 +56,7 @@ static char	*upper_r_checker(char *this, char *dirname)
 static void	upper_r_option(t_opt *option, char *dirname)
 {
 	char	**order;
-	char	*path;
+	t_path	*path;
 	int		i;
 
 	i = 0;

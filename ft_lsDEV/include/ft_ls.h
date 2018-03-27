@@ -50,11 +50,6 @@ typedef struct		s_data
 	int				blocks;
 }					t_data;
 
-typedef struct		s_path
-{
-	char	path[5000];
-}					t_path;
-
 char				ft_type(char *dirname);
 t_right				*ft_right(struct stat fstat);
 void				ft_putright(t_right *right);

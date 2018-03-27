@@ -24,6 +24,12 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_buffer
+{
+	char	buffer[5000];
+	struct s_buffer	*next;
+}					t_buffer;
+
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 size_t				ft_strlen(const char *s);
@@ -97,4 +103,5 @@ char				**ft_rm_tab_path(char **tab);
 void				ft_strswitch(char **str1, char **str2);
 int					ft_intlen(int nbr);
 void				ft_free_tab(char **tab);
+t_buffer			*ft_newbuffer(void);
 #endif
