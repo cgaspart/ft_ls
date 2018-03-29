@@ -81,7 +81,7 @@ SRC_NAME = ft_putchar.c\
 	  ft_tablen.c\
 	  ft_add_path.c\
 	  ft_rm_path.c\
-	  ft_strswitch.c\
+	  ft_swap.c\
 	  ft_intlen.c\
 	  ft_free_tab.c\
 	  ft_str_fjoin.c\

@@ -96,12 +96,15 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_issame(char *first, char *second);
 int					ft_skip_flag(int argc, char **argv);
 int					ft_tablen(char **tab);
-char				*ft_add_str_path(char *str, char *dirname);
+char				*ft_add_str_path(char *str, char *dirname, int option);
 char				**ft_add_tab_path(char **tab, char *dirname);
 char				*ft_rm_str_path(char *str);
 char				**ft_rm_tab_path(char **tab);
-void				ft_strswitch(char **str1, char **str2);
+void				ft_swap(char **str1, char **str2);
 int					ft_intlen(int nbr);
 void				ft_free_tab(char **tab);
 t_buffer			*ft_newbuffer(void);
+int					ft_putstr_b(t_buffer *my_buffer, char *str);
+int					ft_addstr_b(t_buffer *my_buffer, char *str);
+void				rm_lastpath_b(t_buffer *path);
 #endif

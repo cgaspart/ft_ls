@@ -12,12 +12,11 @@
 
 #include "libft.h"
 
-void	ft_strswitch(char **str1, char **str2)
+void	ft_swap(char **str1, char **str2)
 {
 	char *buffer;
 
-	buffer = ft_strdup(*str1);
-	*str1 = ft_strdup(*str2);
-	*str2 = ft_strdup(buffer);
-	free(buffer);
+	buffer = *str1;
+	*str1 = *str2;
+	*str2 = buffer;
 }

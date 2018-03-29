@@ -17,47 +17,29 @@ static void	l_option(char *dirname, char **order)
 	ft_getdata(order, dirname);
 }
 
-static void	mod_option(char **order)
+static int	upper_r_checker(char *this, char *dirname, t_buffer *path)
 {
-	ft_puttab(order);
-}
-
-static char	*upper_r_checker(char *this, char *dirname)
-{
-	char	*path;
-
-	path = ft_strdup(dirname);
-	if (!ft_issame(path, "/"))
-		path = ft_str_fjoin(path, "/", 1);
-	ft_putstr("up_rchck_strjoin 1\n");
-	path = ft_str_fjoin(path, this, 1);
-	ft_putstr("up_rchck_strjoin 2\n");
-	if (ft_type(path) == 'd' && !ft_issame(this, ".") &&
-	!ft_issame(this, "..") && ft_error(path, 1))
+	ft_putstr_b(path, dirname);
+	if (!ft_issame(path->buffer, "/"))
+		ft_addstr_b(path, "/");
+	ft_addstr_b(path, this);
+	if (ft_type(path->buffer) == 'd' && !ft_issame(this, ".") &&
+	!ft_issame(this, "..") && ft_error(path->buffer, 1))
 	{
 		ft_putchar('\n');
-		ft_putstr(path);
+		ft_putstr(path->buffer);
 		ft_putstr(":\n");
-		return (path);
+		return (1);
 	}
 	else
-	{
-		ft_putstr("up_rchck_else 1\n");
-		if (path != NULL)
-		{
-			free(path);
-			path = NULL;
-		}
-		ft_putstr("up_rchck_else 2\n");
-		return (NULL);
-	}
+		rm_lastpath_b(path);
+	return (0);
 }
 
-static void	upper_r_option(t_opt *option, char *dirname)
+static void	upper_r_option(t_opt *option, char *dirname, t_buffer *path)
 {
-	char	**order;
-	t_path	*path;
-	int		i;
+	char		**order;
+	int			i;
 
 	i = 0;
 	order = ft_get_order(dirname, option);
@@ -67,14 +49,10 @@ static void	upper_r_option(t_opt *option, char *dirname)
 		ft_puttab(order);
 	while (order[i])
 	{
-		ft_putstr("up_ropt 1\n");
-		path = upper_r_checker(order[i], dirname);
-		ft_putstr("up_ropt 2\n");
-		if (path != NULL)
+		if (upper_r_checker(order[i], dirname, path))
 		{
-			upper_r_option(option, path);
-			free(path);
-			path = NULL;
+			upper_r_option(option, path->buffer, path);
+			rm_lastpath_b(path);
 		}
 		i++;
 	}
@@ -84,7 +62,8 @@ static void	upper_r_option(t_opt *option, char *dirname)
 
 void		ft_f_simple(t_opt *option, char *dirname)
 {
-	char **order;
+	char		**order;
+	t_buffer	*path;
 
 	if (!ft_is_file(dirname))
 	{
@@ -92,11 +71,14 @@ void		ft_f_simple(t_opt *option, char *dirname)
 		{
 			order = ft_get_order(dirname, option);
 			if (option->upper_r)
-				upper_r_option(option, dirname);
+			{
+				upper_r_option(option, dirname, path = ft_newbuffer());
+				free(path);
+			}
 			else if (option->l == 1)
 				l_option(dirname, order);
 			else if (option->a || option->r || option->t)
-				mod_option(order);
+				ft_puttab(order);
 			ft_free_tab(order);
 		}
 	}

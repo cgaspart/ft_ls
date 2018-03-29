@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+void	rm_lastpath_b(t_buffer *path)
+{
+	int i;
+
+	i = ft_strlen(path->buffer);
+	while (path->buffer[i] != '/')
+	{
+		path->buffer[i] = '\0';
+		i--;
+	}
+	path->buffer[i] = '\0';
+}
+
 char	*path_remover(char *str)
 {
 	char	*res;

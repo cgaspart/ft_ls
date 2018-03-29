@@ -12,19 +12,37 @@
 
 #include "libft.h"
 
-int		ft_putstr_buff(t_buffer *my_buffer, char *str)
+int		ft_addstr_b(t_buffer *my_buffer, char *str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (my_buffer->buffer[i] != '\0' && i < 4999)
+		i++;
+	while (str[j] != '\0' && i < 4999)
+	{
+		my_buffer->buffer[i + j] = str[j];
+		j++;
+	}
+	if (i == 4999)
+		return (0);
+	return (1);
+}
+
+int		ft_putstr_b(t_buffer *my_buffer, char *str)
 {
 	int i;
 
 	i = 0;
-	whiel (str[i] != '\0' && i < 4999)
+	while (str[i] != '\0' && i < 4999)
 	{
 		my_buffer->buffer[i] = str[i];
 		i++;
 	}
 	if (i == 4999)
 		return (0);
-	my_buffer->buffer[i] = '\0';
 	return (1);
 }
 
@@ -33,5 +51,6 @@ t_buffer	*ft_newbuffer(void)
 	t_buffer *struct_buff;
 
 	struct_buff = (t_buffer*)malloc(sizeof(t_buffer));
+	ft_bzero(struct_buff->buffer, 4999);
 	return (struct_buff);
 }

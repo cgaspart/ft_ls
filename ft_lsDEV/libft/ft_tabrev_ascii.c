@@ -23,10 +23,10 @@ char	**ft_tabrev_ascii(char **tab)
 	{
 		if (tab[i + 1] && ft_strcmp(tab[i], tab[i + 1]) < 0)
 		{
-			buff = ft_strdup(tab[i]);
-			buff2 = ft_strdup(tab[i + 1]);
-			tab[i] = ft_strdup(buff2);
-			tab[i + 1] = ft_strdup(buff);
+			buff = tab[i];
+			buff2 = tab[i + 1];
+			tab[i] = buff2;
+			tab[i + 1] = buff;
 			i = 0;
 		}
 		else

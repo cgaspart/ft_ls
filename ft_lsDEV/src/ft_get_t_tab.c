@@ -33,14 +33,14 @@ static char		**get_t_order(char **order)
 	{
 		if (order[i + 1] && get_time(order[i]) < get_time(order[i + 1]))
 		{
-			ft_strswitch(&order[i], &order[i + 1]);
+			ft_swap(&order[i], &order[i + 1]);
 			i = 0;
 		}
 		else if (order[i + 1] && get_time(order[i]) == get_time(order[i + 1]))
 		{
 			if (ft_strcmp(order[i], order[i + 1]) > 0)
 			{
-				ft_strswitch(&order[i], &order[i + 1]);
+				ft_swap(&order[i], &order[i + 1]);
 				i = 0;
 			}
 			else
@@ -61,14 +61,14 @@ static char		**get_t_revorder(char **order)
 	{
 		if (order[i + 1] && get_time(order[i]) > get_time(order[i + 1]))
 		{
-			ft_strswitch(&order[i], &order[i + 1]);
+			ft_swap(&order[i], &order[i + 1]);
 			i = 0;
 		}
 		else if (order[i + 1] && get_time(order[i]) == get_time(order[i + 1]))
 		{
 			if (ft_strcmp(order[i], order[i + 1]) < 0)
 			{
-				ft_strswitch(&order[i], &order[i + 1]);
+				ft_swap(&order[i], &order[i + 1]);
 				i = 0;
 			}
 			else

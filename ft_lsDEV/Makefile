@@ -16,7 +16,7 @@ OBJ_PATH = obj
 CPPFLAGS = -Iinclude
 LDFLAGS = -L./libft
 LDLIBS = -lft
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g
 CC = clang
 SRC_NAME = main.c\
 	  ft_type.c\

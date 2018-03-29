@@ -26,6 +26,17 @@ static void		ft_conv2(char *res, char *time, int j)
 	res[j] = '\0';
 }
 
+void			print_convert_date(char *time)
+{
+	char *buffer;
+
+	buffer = ft_date_converter(time);
+	ft_putchar(' ');
+	ft_putstr(buffer);
+	ft_putchar(' ');
+	free(buffer);
+}
+
 char			*ft_date_converter(char *time)
 {
 	char	*res;

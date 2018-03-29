@@ -29,10 +29,8 @@ char	*ft_str_fjoin(char *s1, char *s2, int i)
 	fraiche[len] = '\0';
 	if (i == 1)
 	{
-		ft_putstr("strjoin1\n");
 		if (s1 != NULL)
 			free(s1);
-		ft_putstr("strjoin2\n");
 		s1 = NULL;
 	}
 	if (i == 2)

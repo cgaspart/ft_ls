@@ -18,6 +18,7 @@ static int		ft_get_right(t_right *right, char *this, int i)
 		ft_putchar('\n');
 	ft_putchar(ft_type(this));
 	ft_putright(right);
+	free(right);
 	if (ft_type(this) == 'l')
 		return (1);
 	return (0);
@@ -46,15 +47,15 @@ static int		owner_grp_check(struct passwd *duser, struct group *dgroup,
 	return (1);
 }
 
-static char		*is_link(char *name, char *this)
+static char		*is_link(char *name)
 {
 	char buf[255];
 	int cc;
 
-	cc = readlink(this, buf, BUFSIZ);
+	cc = readlink(name, buf, BUFSIZ);
 	buf[cc] = '\0';
-	name = ft_strjoin(name, " -> ");
-	name = ft_strjoin(name, buf);
+	name = ft_str_fjoin(name, " -> ", 1);
+	name = ft_str_fjoin(name, buf, 1);
 	return (name);
 }
 
@@ -63,12 +64,13 @@ void			ft_print_l(t_data *data, int total, char **order)
 	struct stat			fstat;
 	struct passwd		*duser;
 	struct group		*dgroup;
+	t_buffer			*name;
 	int					i;
-	char				*name;
 
 	i = 0;
 	if (total)
 		ft_get_blocks(data);
+	name = ft_newbuffer();
 	while (order[i])
 	{
 		if (lstat(order[i], &fstat) == -1)
@@ -76,11 +78,11 @@ void			ft_print_l(t_data *data, int total, char **order)
 			perror("");
 			exit(0);
 		}
-		name = ft_strdup(order[i]);
+		ft_putstr_b(name, order[i]);
 		duser = getpwuid(fstat.st_uid);
 		dgroup = getgrgid(fstat.st_gid);
 		if (ft_get_right(ft_right(fstat), order[i], i))
-			name = is_link(order[i], name);
+			ft_putstr_b(name, is_link(order[i]));
 		ft_print_space(data->link + 2, ft_intlen(fstat.st_nlink));
 		ft_putnbr(fstat.st_nlink);
 		if (!owner_grp_check(duser, dgroup, data))
@@ -102,13 +104,14 @@ void			ft_print_l(t_data *data, int total, char **order)
 			ft_print_space(data->size, ft_intlen(fstat.st_size));
 			ft_putnbr(fstat.st_size);
 		}
-		ft_putchar(' ');
-		ft_putstr(ft_date_converter(ctime(&fstat.st_mtime)));
-		ft_putchar(' ');
+		print_convert_date(ctime(&fstat.st_mtime));
 		if (total)
-			ft_putstr(ft_rm_str_path(name));
+		{
+			name = ft_rm_str_path(name->buffer);
+			ft_putstr(name->buffer);
+		}
 		else
-			ft_putstr(name);
+			ft_putstr(name->buffer);
 		i++;
 	}
 	//free(data);

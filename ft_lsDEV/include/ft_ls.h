@@ -75,4 +75,5 @@ char				**ft_get_order(char *dirname, t_opt *option);
 char				**ft_get_lorder(char *dirname, t_opt *option);
 void				ft_f_multi(char **argfile, char **argdir, t_opt *option);
 char				**ft_get_t_tab(char *dirname, char **order, int r_opt);
+void				print_convert_date(char *time);
 #endif

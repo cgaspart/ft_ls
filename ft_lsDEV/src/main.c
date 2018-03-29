@@ -19,10 +19,10 @@ static void		arg_checker(char **argdir, char **argfile)
 	error = 1;
 	if (argdir[0] != NULL && !ft_strcmp(argdir[0], "error"))
 		error = 0;
-	if (argdir[0] == NULL && argfile[0] == NULL && !error)
+	if (argfile[0] == NULL && !error)
 	{
-		ft_free_tab(argdir);
-		ft_free_tab(argfile);
+		free(argfile);
+		free(argdir);
 		exit(0);
 	}
 }
@@ -50,8 +50,8 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 		ft_f_simple(option, argdir[0]);
 	else
 		ft_f_multi(argfile, argdir, option);
-	ft_free_tab(argdir);
 	ft_free_tab(argfile);
+	ft_free_tab(argdir);
 }
 
 static void		ft_no_flag(int argc, char **argv)
