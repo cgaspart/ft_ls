@@ -72,4 +72,6 @@ void			ft_getdata(char **order, char *dirname)
 		order = ft_add_tab_path(order, dirname);
 	if (ft_getstat(order, data))
 		ft_print_l(data, !ft_is_file(dirname), order);
+	else
+		ft_rm_tab_path(order);
 }

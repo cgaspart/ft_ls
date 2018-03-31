@@ -47,16 +47,17 @@ static int		owner_grp_check(struct passwd *duser, struct group *dgroup,
 	return (1);
 }
 
-static char		*is_link(char *name)
+static void		is_link(t_buffer *name)
 {
 	char buf[255];
 	int cc;
 
-	cc = readlink(name, buf, BUFSIZ);
+	cc = readlink(name->buffer, buf, BUFSIZ);
 	buf[cc] = '\0';
-	name = ft_str_fjoin(name, " -> ", 1);
-	name = ft_str_fjoin(name, buf, 1);
-	return (name);
+	ft_addstr_b(name, " -> ");
+	ft_addstr_b(name, buf);
+	/*name = ft_str_fjoin(name, " -> ", 1);
+	name = ft_str_fjoin(name, buf, 1);*/
 }
 
 void			ft_print_l(t_data *data, int total, char **order)
@@ -82,7 +83,7 @@ void			ft_print_l(t_data *data, int total, char **order)
 		duser = getpwuid(fstat.st_uid);
 		dgroup = getgrgid(fstat.st_gid);
 		if (ft_get_right(ft_right(fstat), order[i], i))
-			ft_putstr_b(name, is_link(order[i]));
+			is_link(name);
 		ft_print_space(data->link + 2, ft_intlen(fstat.st_nlink));
 		ft_putnbr(fstat.st_nlink);
 		if (!owner_grp_check(duser, dgroup, data))
@@ -107,14 +108,15 @@ void			ft_print_l(t_data *data, int total, char **order)
 		print_convert_date(ctime(&fstat.st_mtime));
 		if (total)
 		{
-			name = ft_rm_str_path(name->buffer);
+			ft_rm_b_path(name);
 			ft_putstr(name->buffer);
 		}
 		else
 			ft_putstr(name->buffer);
 		i++;
 	}
-	//free(data);
+	free(data);
+	free(name);
 	ft_rm_tab_path(order);
 	ft_putchar('\n');
 }

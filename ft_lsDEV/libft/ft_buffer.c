@@ -12,6 +12,24 @@
 
 #include "libft.h"
 
+void	ft_rm_b_path(t_buffer *my_buffer)
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	i = ft_strlen(my_buffer->buffer);
+	while (my_buffer->buffer[i] != '/')
+		i--;
+	i++;
+	while (my_buffer->buffer[i + j] != '\0')
+	{
+		my_buffer->buffer[j] = my_buffer->buffer[i + j];
+		j++;
+	}
+	my_buffer->buffer[j] = '\0';
+}
+
 int		ft_addstr_b(t_buffer *my_buffer, char *str)
 {
 	int i;
@@ -26,6 +44,7 @@ int		ft_addstr_b(t_buffer *my_buffer, char *str)
 		my_buffer->buffer[i + j] = str[j];
 		j++;
 	}
+	my_buffer->buffer[i + j] = '\0';
 	if (i == 4999)
 		return (0);
 	return (1);
@@ -41,6 +60,7 @@ int		ft_putstr_b(t_buffer *my_buffer, char *str)
 		my_buffer->buffer[i] = str[i];
 		i++;
 	}
+	my_buffer->buffer[i] = '\0';
 	if (i == 4999)
 		return (0);
 	return (1);

@@ -33,10 +33,10 @@ void	ft_free_tab(char **tab)
 			}
 			i++;
 		}
-		if (tab != NULL)
-		{
-			free(tab);
-			tab = NULL;
-		}
+	}
+	if (tab != NULL)
+	{
+		free(tab);
+		tab = NULL;
 	}
 }
