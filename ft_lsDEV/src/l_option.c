@@ -32,7 +32,7 @@ static void		user_group_checker(struct stat fstat, t_data *data)
 		data->grplen = ft_strlen(dgroup->gr_name);
 }
 
-static int		ft_getstat(char **order, t_data *data)
+int		ft_getstat(char **order, t_data *data)
 {
 	struct stat			fstat;
 	int					i;
@@ -49,16 +49,17 @@ static int		ft_getstat(char **order, t_data *data)
 			data->link = ft_intlen(fstat.st_nlink);
 		user_group_checker(fstat, data);
 		if (ft_intlen(fstat.st_size) > data->size)
-			data->size = ft_intlen(fstat.st_size);
+		data->size = ft_intlen(fstat.st_size);
 		data->blocks = data->blocks + fstat.st_blocks;
 		i++;
 	}
 	return (1);
 }
 
-void			ft_getdata(char **order, char *dirname)
+void			l_option(char *dirname, t_opt *option)
 {
 	t_data			*data;
+	char			**order;
 	int				i;
 
 	i = 0;
@@ -68,10 +69,10 @@ void			ft_getdata(char **order, char *dirname)
 	data->grplen = 0;
 	data->size = 0;
 	data->blocks = 0;
-	if (dirname != NULL)
-		order = ft_add_tab_path(order, dirname);
+	order = ft_get_order(dirname, option);
+	order = ft_add_tab_path(order, dirname);
 	if (ft_getstat(order, data))
 		ft_print_l(data, !ft_is_file(dirname), order);
-	else
-		ft_rm_tab_path(order);
+	ft_free_tab(order);
+	free(data);
 }

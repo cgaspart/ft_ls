@@ -12,6 +12,22 @@
 
 #include "ft_ls.h"
 
+static int	get_nbr_arg_dir(int argc, char **argv);
+{
+	int i;
+	int j;
+
+	i = ft_skip_flag(argc, argv);
+	j = 0;
+	while (i < argc)
+	{
+		if (!ft_is_file(argv[i]) && ft_error_np(argv[j])))
+			j++;
+		i++;
+	}
+	return (j);
+}
+
 char		**ft_f_arg_ascii_file(int argc, char **argv)
 {
 	char	**res;
@@ -48,7 +64,7 @@ char		**ft_f_arg_ascii_dir(int argc, char **argv)
 	i = 0;
 	error = 0;
 	j = ft_skip_flag(argc, argv);
-	res = malloc(sizeof(char*) * argc);
+	res = malloc(sizeof(char*) * get_nbr_arg_dir(argc, argv) + 1);
 	while (j < argc)
 	{
 		if (!ft_is_file(argv[j]) && (error = ft_error(argv[j], 0)))
@@ -60,9 +76,12 @@ char		**ft_f_arg_ascii_dir(int argc, char **argv)
 			error = 1;
 		j++;
 	}
+	if (error && i == 0)
+	{
+		res[0] = ft_strdup("error");
+		i++
+	}
 	res[i] = NULL;
 	res = ft_tabascii(res);
-	if (error && i == 0)
-		res[0] = ft_strdup("error");
 	return (res);
 }

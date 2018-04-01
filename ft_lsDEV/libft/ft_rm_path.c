@@ -53,11 +53,8 @@ char	*path_remover(char *str)
 
 char	*ft_rm_str_path(char *str)
 {
-	int i;
-
 	if (str == NULL)
 		return (NULL);
-	i = 0;
 	if (ft_strchr(str, '/'))
 		return (path_remover(str));
 	return (str);
@@ -65,12 +62,15 @@ char	*ft_rm_str_path(char *str)
 
 char	**ft_rm_tab_path(char **tab)
 {
-	int i;
+	char	*buff;
+	int			i;
 
 	i = 0;
 	while (tab[i])
 	{
-		tab[i] = ft_rm_str_path(tab[i]);
+		buff = ft_strdup(tab[i]);
+		free(tab[i]);
+		tab[i] = ft_rm_str_path(buff);
 		i++;
 	}
 	return (tab);

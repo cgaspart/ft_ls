@@ -60,7 +60,7 @@ int					ft_is_file(char *name);
 char				**ft_check_dir(int argc, char **argv);
 char				**ft_check_file(int argc, char **argv);
 int					ft_arg_opt(char **argv, int argc, t_opt *option);
-void				ft_getdata(char **order, char *dirname);
+void				l_option(char *dirname, t_opt *option);
 void				ft_print_l(t_data *data, int total, char **order);
 char				**ft_get_ascii_tab(char *dirname, int a_option);
 char				**ft_nf_arg_ascii_dir(int argc, char **argv);
@@ -76,4 +76,6 @@ char				**ft_get_lorder(char *dirname, t_opt *option);
 void				ft_f_multi(char **argfile, char **argdir, t_opt *option);
 char				**ft_get_t_tab(char *dirname, char **order, int r_opt);
 void				print_convert_date(char *time);
+int					ft_getstat(char **order, t_data *data);
+int					ft_error_np(char *dirname);
 #endif

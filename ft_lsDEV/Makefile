@@ -27,7 +27,7 @@ SRC_NAME = main.c\
 	  ft_error.c\
 	  ft_is_file.c\
 	  ft_arg_opt.c\
-	  ft_getdata.c\
+	  l_option.c\
 	  ft_print_l.c\
 	  ft_get_ascii_tab.c\
 	  ft_nf_arg_ascii.c\
@@ -37,7 +37,8 @@ SRC_NAME = main.c\
 	  ft_f_simple.c\
 	  ft_get_order.c\
 	  ft_f_multi.c\
-	  ft_get_t_tab.c
+	  ft_get_t_tab.c\
+	  ft_error_np.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

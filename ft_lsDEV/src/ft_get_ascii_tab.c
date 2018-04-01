@@ -39,7 +39,7 @@ static char		**ft_tab_fname(char *dirname, int a_option)
 	struct dirent	*file;
 
 	i = 0;
-	res = ft_memalloc(sizeof(char*) * ft_nbr_tab(dirname, a_option) + 1);
+	res = malloc(sizeof(char*) * ft_nbr_tab(dirname, a_option) + 1);
 	dir = opendir(dirname);
 	while ((file = readdir(dir)))
 	{

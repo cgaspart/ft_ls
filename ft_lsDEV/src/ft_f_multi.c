@@ -14,7 +14,16 @@
 
 static void		l_file(char **argfile)
 {
-	ft_getdata(argfile, NULL);
+	t_data			*data;
+
+	data = malloc(sizeof(t_data));
+	data->link = 0;
+	data->ownerlen = 0;
+	data->grplen = 0;
+	data->size = 0;
+	data->blocks = 0;
+	if (ft_getstat(argfile, data))
+		ft_print_l(data, 0, argfile);
 }
 
 static void		multi_dir(char **argdir, t_opt *option)

@@ -17,12 +17,8 @@ void	ft_free_tab(char **tab)
 	int i;
 
 	i = 0;
-	if (tab[1] == NULL && tab[0] != NULL)
-	{
-		free(tab);
-		tab = NULL;
-	}
-	else if (tab != NULL)
+
+	if (tab != NULL)
 	{
 		while (tab[i])
 		{
@@ -33,9 +29,6 @@ void	ft_free_tab(char **tab)
 			}
 			i++;
 		}
-	}
-	if (tab != NULL)
-	{
 		free(tab);
 		tab = NULL;
 	}

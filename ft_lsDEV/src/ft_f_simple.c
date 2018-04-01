@@ -12,11 +12,6 @@
 
 #include "ft_ls.h"
 
-static void	l_option(char *dirname, char **order)
-{
-	ft_getdata(order, dirname);
-}
-
 static int	upper_r_checker(char *this, char *dirname, t_buffer *path)
 {
 	ft_putstr_b(path, dirname);
@@ -44,7 +39,7 @@ static void	upper_r_option(t_opt *option, char *dirname, t_buffer *path)
 	i = 0;
 	order = ft_get_order(dirname, option);
 	if (option->l)
-		ft_getdata(order, dirname);
+		l_option(dirname, option);
 	else
 		ft_puttab(order);
 	while (order[i])
@@ -76,7 +71,7 @@ void		ft_f_simple(t_opt *option, char *dirname)
 				free(path);
 			}
 			else if (option->l == 1)
-				l_option(dirname, order);
+				l_option(dirname, option);
 			else if (option->a || option->r || option->t)
 				ft_puttab(order);
 			ft_free_tab(order);

@@ -12,22 +12,19 @@
 
 #include "libft.h"
 
-char	*ft_add_str_path(char *str, char *dirname, int option)
+char	*ft_add_str_path(char *str, char *dirname)
 {
-	char *fresh;
+	t_buffer	*buff;
 
-	fresh = ft_strjoin(dirname, "/");
-	fresh = ft_str_fjoin(fresh, str, 1);
-	if (option == 1)
-		free(str);
-	if (option == 2)
-		free(dirname);
-	if (option == 3)
-	{
-		free(str);
-		free(dirname);
-	}
-	return (fresh);
+	buff = ft_newbuffer();
+	ft_putstr_b(buff, dirname);
+	ft_addstr_b(buff, "/");
+	ft_addstr_b(buff, str);
+	free(str);
+	str = malloc(sizeof(char) * (ft_strlen(buff->buffer) + 1));
+	str = ft_strcpy(str, buff->buffer);
+	free(buff);
+	return (str);
 }
 
 char	**ft_add_tab_path(char **tab, char *dirname)
@@ -37,7 +34,7 @@ char	**ft_add_tab_path(char **tab, char *dirname)
 	i = 0;
 	while (tab[i])
 	{
-		tab[i] = ft_add_str_path(tab[i], dirname, 1);
+		tab[i] = ft_add_str_path(tab[i], dirname);
 		i++;
 	}
 	return (tab);
