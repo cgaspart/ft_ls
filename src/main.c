@@ -12,19 +12,20 @@
 
 #include "ft_ls.h"
 
-static void		arg_checker(char **argdir, char **argfile)
+static int		arg_error(int argc, char **argv)
 {
+	int i;
 	int error;
 
-	error = 1;
-	if (argdir[0] != NULL && !ft_strcmp(argdir[0], "error"))
-		error = 0;
-	if (argfile[0] == NULL && !error)
+	i = ft_skip_flag(argc, argv);
+	error = 0;
+	while (i < argc)
 	{
-		free(argfile);
-		free(argdir);
-		exit(0);
+		if (!ft_error_np(argv[i]))
+			error = 1;
+		i++;
 	}
+	return (error);
 }
 
 static void		ft_flag(int argc, char **argv, t_opt *option)
@@ -32,18 +33,14 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 	char	**argfile;
 	char	**argdir;
 
+	argdir = get_where_dir(argc, argv);
+	argfile = get_where_file(argc, argv);
 	if (option->r == 1)
 	{
-		argfile = ft_f_arg_revascii_file(argc, argv);
-		argdir = ft_f_arg_revascii_dir(argc, argv);
+		argfile = ft_tabrev_ascii(argfile);
+		argdir = ft_tabrev_ascii(argdir);
 	}
-	else
-	{
-		argdir = ft_f_arg_ascii_dir(argc, argv);
-		argfile = ft_f_arg_ascii_file(argc, argv);
-	}
-	arg_checker(argdir, argfile);
-	if (argdir[0] == NULL && argfile[0] == NULL)
+	if (argdir[0] == NULL && argfile[0] == NULL && !arg_error(argc, argv))
 		ft_f_simple(option, ".");
 	else if (argfile[0] == NULL && argdir[1] == NULL &&
 		ft_skip_flag(argc, argv) == argc - 1)
@@ -56,7 +53,9 @@ static void		ft_flag(int argc, char **argv, t_opt *option)
 
 static void		ft_no_flag(int argc, char **argv)
 {
-	if (argc > 2)
+	if (argv[1][0] == '-' && argv[1][1] == '-')
+		ft_simple(".");
+	else if (argc > 2)
 		ft_nf_multi(argc, argv);
 	else
 		ft_simple(argv[1]);

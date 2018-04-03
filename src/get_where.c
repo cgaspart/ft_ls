@@ -21,7 +21,7 @@ static int	get_nbr_arg_dir(int argc, char **argv)
 	j = 0;
 	while (i < argc)
 	{
-		if (!ft_is_file(argv[i]) && ft_error_np(argv[j]))
+		if (!ft_is_file(argv[i]) && ft_error_np(argv[i]))
 			j++;
 		i++;
 	}
@@ -37,14 +37,14 @@ static int	get_nbr_arg_file(int argc, char **argv)
 	j = 0;
 	while (i < argc)
 	{
-		if (ft_is_file(argv[i]) && ft_error_np(argv[j]))
+		if (ft_is_file(argv[i]) && ft_error_np(argv[i]))
 			j++;
 		i++;
 	}
 	return (j);
 }
 
-char		**ft_f_arg_ascii_file(int argc, char **argv)
+char		**get_where_file(int argc, char **argv)
 {
 	char	**res;
 	int		i;
@@ -59,7 +59,7 @@ char		**ft_f_arg_ascii_file(int argc, char **argv)
 	{
 		if (ft_is_file(argv[j]) && ft_error(argv[j], 0))
 		{
-			res[i] = argv[j];
+			res[i] = ft_strdup(argv[j]);
 			i++;
 		}
 		j++;
@@ -70,7 +70,7 @@ char		**ft_f_arg_ascii_file(int argc, char **argv)
 	return (res);
 }
 
-char		**ft_f_arg_ascii_dir(int argc, char **argv)
+char		**get_where_dir(int argc, char **argv)
 {
 	char	**res;
 	int		i;
@@ -81,14 +81,17 @@ char		**ft_f_arg_ascii_dir(int argc, char **argv)
 	res = malloc(sizeof(char*) * get_nbr_arg_dir(argc, argv) + 1);
 	while (j < argc)
 	{
-		if (!ft_is_file(argv[j]) && ft_error(argv[j], 0))
+		if (argv[j][0] == '-' && argv[j][1] == '-')
+			res[i] = ".";
+		else if (!ft_is_file(argv[j]) && ft_error(argv[j], 0))
 		{
-			res[i] = argv[j];
+			res[i] = ft_strdup(argv[j]);
 			i++;
 		}
 		j++;
 	}
 	res[i] = NULL;
-	res = ft_tabascii(res);
+	if (res[0] != NULL)
+		res = ft_tabascii(res);
 	return (res);
 }

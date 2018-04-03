@@ -17,7 +17,11 @@ int		ft_skip_flag(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (argv[i][0] == '-')
+		if (argv[i][0] == '-' && argv[i][1] == '\0')
+			return (i);
+		else if (argv[i][0] == '-' && argv[i][1] == '-')
+			return (i + 1);
+		else if (argv[i][0] == '-')
 			i++;
 		else
 			break ;

@@ -16,7 +16,6 @@ char	**ft_tabrev_ascii(char **tab)
 {
 	int		i;
 	char	*buff;
-	char	*buff2;
 
 	i = 0;
 	while (tab[i])
@@ -24,8 +23,7 @@ char	**ft_tabrev_ascii(char **tab)
 		if (tab[i + 1] && ft_strcmp(tab[i], tab[i + 1]) < 0)
 		{
 			buff = tab[i];
-			buff2 = tab[i + 1];
-			tab[i] = buff2;
+			tab[i] = tab[i + 1];
 			tab[i + 1] = buff;
 			i = 0;
 		}

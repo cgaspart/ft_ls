@@ -54,7 +54,7 @@ void			ft_f_multi(char **argfile, char **argdir, t_opt *option)
 		else
 			ft_puttab(argfile);
 	}
-	if (argdir[0] != NULL && ft_strcmp(argdir[0], "error"))
+	if (argdir[0] != NULL)
 	{
 		if (argfile[0])
 			ft_putstr("\n");

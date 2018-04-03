@@ -59,7 +59,9 @@ int				ft_arg_opt(char **argv, int argc, t_opt *option)
 	*option = (t_opt){0, 0, 0, 0, 0};
 	while (i < argc)
 	{
-		if (argv[i][0] == '-')
+		if (argv[i][0] == '-' && argv[i][1] == '-')
+			break ;
+		else if (argv[i][0] == '-')
 		{
 			ft_get_opt(argv[i], option);
 			res = 1;

@@ -31,8 +31,7 @@ SRC_NAME = main.c\
 	  ft_print_l.c\
 	  ft_get_ascii_tab.c\
 	  ft_nf_arg_ascii.c\
-	  ft_f_arg_ascii.c\
-	  ft_f_arg_revascii.c\
+	  get_where.c\
 	  ft_nf_multi.c\
 	  ft_f_simple.c\
 	  ft_get_order.c\
